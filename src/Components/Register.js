@@ -1,9 +1,16 @@
 import React, { useRef, useContext } from "react";
-import { UserContext } from "../Context/UserContext";
+import { useHistory } from "react-router-dom";
+import { useSession } from "../Context/SessionContext";
 
 export default function Register() {
+  let history = useHistory();
   const registerFormRef = useRef();
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useSession();
+  // const { auth, setAuth } = useContext(AuthContext);
+
+  // HTML FORM SEND
+  // <Form action="/subdomain" method="post">
+  // <input type="text" name="username"/>
 
   const registerNewUser = (e) => {
     e.preventDefault();
@@ -13,18 +20,30 @@ export default function Register() {
       username: registerFormRef.current["username"].value,
       email: registerFormRef.current["email"].value,
       password: registerFormRef.current["password"].value,
-      contacts: [],
-      data: [],
     };
-    // console.log(data);
 
-    fetch("http://localhost:4000/register", {
+    console.log(userData);
+
+    fetch("https://port-contact-server.herokuapp.com/register", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
+      "Access-Control-Allow-Origin":
+        "https://port-contact-server.herokuapp.com",
+      credentials: "include",
       body: JSON.stringify(userData),
     })
       .then((res) => res.json())
-      .then((res) => console.log(res));
+      .then((res) => {
+        if (res.success === true) {
+          setUser(res.user);
+          history.push("/chat");
+        } else {
+          console.log(res.message);
+        }
+      })
+      .catch((err) => console.log(err));
 
     registerFormRef.current.reset();
   };
@@ -46,7 +65,7 @@ export default function Register() {
         ></input>
       </div>
 
-      <input type="email" name="email" placeholder="E-mail:" required></input>
+      <input type="email" name="email" placeholder="E-mail" required></input>
       <input
         type="password"
         name="password"

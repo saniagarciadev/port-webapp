@@ -25,21 +25,7 @@ body {
   /* margin: auto; */
 }
 
-.register-form {
-  display: flex;
-  flex-direction: column;
-  width: 270px;
-  margin: auto;
-}
-
-.login-form {
-  display: flex;
-  flex-direction: column;
-  width: 270px;
-  margin: auto;
-}
-
-.conversations {
+.connections {
   display: flex;
   flex-direction: row;
   position: fixed;
@@ -63,6 +49,26 @@ body {
 
   margin-top: 17px;
   height: 25px;
+}
+
+.logout-button {
+  position: fixed;
+  right: 130px;
+  top: 35px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  width: 270px;
+  margin: auto;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 270px;
+  margin: auto;
 }
 
 .user-selection {

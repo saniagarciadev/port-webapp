@@ -1,9 +1,13 @@
 import React, { useRef, useContext } from "react";
-import { UserContext } from "../Context/UserContext";
+import { useHistory } from "react-router-dom";
+
+import { useSession } from "../Context/SessionContext";
 
 export default function LogIn() {
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useSession();
+  // const { auth, setAuth } = useContext(AuthContext);
   const logInFormRef = useRef();
+  const history = useHistory();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -13,15 +17,30 @@ export default function LogIn() {
       username: logInFormRef.current["username"].value,
       password: logInFormRef.current["password"].value,
     };
-    // console.log(loginData);
+    console.log(loginData);
 
-    fetch("http://localhost:4000/login", {
+    fetch("https://port-contact-server.herokuapp.com/login", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(loginData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      "Access-Control-Allow-Origin":
+        "https://port-contact-server.herokuapp.com",
+      credentials: "include",
     })
       .then((res) => res.json())
-      .then((res) => console.log(res));
+      .then((res) => {
+        if (res.success === true) {
+          console.log(res.user);
+          // console.log(`Logged in user: ${res.user}`);
+          setUser(res.user);
+          history.push("/chat");
+        } else {
+          console.log(res.message);
+        }
+      })
+      .catch((err) => console.log(err));
 
     logInFormRef.current.reset();
   };
