@@ -21,8 +21,7 @@ export function SessionProvider({ children }) {
         method: "GET",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        "Access-Control-Allow-Origin":
-          "https://port-contact-server.herokuapp.com",
+        "Access-Control-Allow-Origin": "https://port.contact/",
       })
         .then((res) => res.json())
         .then((res) => {

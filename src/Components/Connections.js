@@ -20,8 +20,7 @@ export default function Connections(props) {
     fetch(REACT_APP_API_URL + "/messages/" + connectionId, {
       method: "GET",
       credentials: "include",
-      "Access-Control-Allow-Origin":
-        "https://port-contact-server.herokuapp.com",
+      "Access-Control-Allow-Origin": "https://port.contact/",
     })
       .then((res) => res.json())
       .then((res) => {

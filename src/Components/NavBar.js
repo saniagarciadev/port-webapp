@@ -13,8 +13,7 @@ export default function NavBar() {
   const handleLogout = () => {
     fetch(REACT_APP_API_URL + "/logout", {
       credentials: "include",
-      "Access-Control-Allow-Origin":
-        "https://port-contact-server.herokuapp.com",
+      "Access-Control-Allow-Origin": "https://port.contact/",
     })
       .then((res) => res.json())
       .then((res) => {

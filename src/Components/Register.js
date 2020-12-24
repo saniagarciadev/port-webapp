@@ -29,8 +29,7 @@ export default function Register() {
       headers: {
         "Content-Type": "application/json",
       },
-      "Access-Control-Allow-Origin":
-        "https://port-contact-server.herokuapp.com",
+      "Access-Control-Allow-Origin": "https://port.contact/",
       credentials: "include",
       body: JSON.stringify(userData),
     })

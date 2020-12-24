@@ -25,8 +25,7 @@ export default function LogIn() {
       headers: {
         "Content-Type": "application/json",
       },
-      "Access-Control-Allow-Origin":
-        "https://port-contact-server.herokuapp.com",
+      "Access-Control-Allow-Origin": "https://port.contact/",
       credentials: "include",
     })
       .then((res) => res.json())
