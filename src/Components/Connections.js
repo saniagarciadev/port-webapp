@@ -20,7 +20,7 @@ export default function Connections(props) {
     fetch(PORT_CONTACT_SERVER + "/messages/" + connectionId, {
       method: "GET",
       credentials: "include",
-      "Access-Control-Allow-Origin": "https://port.contact/",
+      // "Access-Control-Allow-Origin": "https://port.contact/",
     })
       .then((res) => res.json())
       .then((res) => {

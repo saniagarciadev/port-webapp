@@ -29,7 +29,7 @@ export default function Register() {
       headers: {
         "Content-Type": "application/json",
       },
-      "Access-Control-Allow-Origin": "https://port.contact/",
+      // "Access-Control-Allow-Origin": "https://port.contact/",
       credentials: "include",
       body: JSON.stringify(userData),
     })

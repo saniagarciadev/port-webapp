@@ -17,11 +17,11 @@ export function SessionProvider({ children }) {
 
   useEffect(() => {
     if (!user) {
-      fetch("https://port-contact-server.herokuapp.com", {
+      fetch("https://port-contact-server.herokuapp.com/", {
         method: "GET",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        "Access-Control-Allow-Origin": "https://port.contact/",
+        // "Access-Control-Allow-Origin": "https://port.contact/",
       })
         .then((res) => res.json())
         .then((res) => {

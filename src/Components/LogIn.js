@@ -24,7 +24,7 @@ export default function LogIn() {
       headers: {
         "Content-Type": "application/json",
       },
-      "Access-Control-Allow-Origin": "https://port.contact/",
+      // "Access-Control-Allow-Origin": "https://port.contact/",
       credentials: "include",
     })
       .then((res) => res.json())

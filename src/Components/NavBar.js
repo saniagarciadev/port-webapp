@@ -15,7 +15,7 @@ export default function NavBar() {
   const handleLogout = () => {
     fetch(PORT_CONTACT_SERVER + "/logout", {
       credentials: "include",
-      "Access-Control-Allow-Origin": "https://port.contact/",
+      // "Access-Control-Allow-Origin": "https://port.contact/",
     })
       .then((res) => res.json())
       .then((res) => {
