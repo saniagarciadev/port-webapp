@@ -20,7 +20,7 @@ export function SessionProvider({ children }) {
       fetch("https://port-contact-server.herokuapp.com/", {
         method: "GET",
         credentials: "include",
-        headers: { "Content-Type": "application/json" },
+        // headers: { "Content-Type": "application/json" },
         // "Access-Control-Allow-Origin": "https://port.contact/",
       })
         .then((res) => res.json())

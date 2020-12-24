@@ -15,7 +15,7 @@ export default function Chat(props) {
   const chatBottom = useRef();
   const messageRef = useRef();
   const [chatHeight, setChatHeight] = useState("");
-  const { socket } = useSocket();
+  // const { socket } = useSocket();
 
   const scrollToBottom = () => {
     if (chatBottom.current) {
@@ -65,7 +65,7 @@ export default function Chat(props) {
       content: messageRef.current["message"].value,
     };
 
-    socket.emit("message", messageData);
+    // socket.emit("message", messageData);
 
     // fetch(PORT_CONTACT_SERVER + "/messages/" + conversation.connection._id, {
     //   method: "POST",

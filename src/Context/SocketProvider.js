@@ -12,21 +12,21 @@ export function SocketProvider({ children }) {
   const [socket, setSocket] = useState(null);
   const { user, conversation, setConversation } = useSession();
 
-  useEffect(() => {
-    if (user) {
-      const newSocket = io("https://port-contact-server.herokuapp.com", {
-        // query: user,
-        withCredentials: true,
-      });
-      setSocket(newSocket);
-      socket.on("message", (newMessage) => {
-        setConversation((prev) => {
-          conversation.messages = [...prev.messages, newMessage];
-          console.log(newMessage);
-        });
-      });
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     const newSocket = io("https://port-contact-server.herokuapp.com", {
+  //       // query: user,
+  //       withCredentials: true,
+  //     });
+  //     setSocket(newSocket);
+  //     socket.on("message", (newMessage) => {
+  //       setConversation((prev) => {
+  //         conversation.messages = [...prev.messages, newMessage];
+  //         console.log(newMessage);
+  //       });
+  //     });
+  //   }
+  // }, [user]);
 
   const values = {
     socket,
