@@ -15,7 +15,7 @@ export function SocketProvider({ children }) {
   useEffect(() => {
     if (user) {
       const newSocket = io("https://port-contact-server.herokuapp.com", {
-        query: user,
+        // query: user,
         withCredentials: true,
       });
       setSocket(newSocket);
