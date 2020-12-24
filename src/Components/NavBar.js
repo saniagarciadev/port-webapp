@@ -1,17 +1,19 @@
 import React from "react";
 import { useHistory, Link } from "react-router-dom";
 import { useSession } from "../Context/SessionContext";
+import { useSocket } from "../Context/SocketContext";
 import Connections from "./Connections";
 const {
-  REACT_APP_API_URL = "https://port-contact-server.herokuapp.com",
+  PORT_CONTACT_SERVER = "https://port-contact-server.herokuapp.com",
 } = process.env;
 
 export default function NavBar() {
   let history = useHistory();
   const { user, setUser } = useSession();
+  const { socket } = useSocket();
 
   const handleLogout = () => {
-    fetch(REACT_APP_API_URL + "/logout", {
+    fetch(PORT_CONTACT_SERVER + "/logout", {
       credentials: "include",
       "Access-Control-Allow-Origin": "https://port.contact/",
     })
@@ -19,6 +21,7 @@ export default function NavBar() {
       .then((res) => {
         if (res.success === true) {
           setUser(null);
+          socket.disconnect(true);
           history.push("/");
         } else {
           console.log(res.message);

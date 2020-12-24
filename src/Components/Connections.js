@@ -2,11 +2,11 @@ import React from "react";
 import { useSession } from "../Context/SessionContext";
 import AddConnection from "./AddConnection";
 const {
-  REACT_APP_API_URL = "https://port-contact-server.herokuapp.com",
+  PORT_CONTACT_SERVER = "https://port-contact-server.herokuapp.com",
 } = process.env;
 
 export default function Connections(props) {
-  const { user, setUser, setConversation } = useSession();
+  const { user, setUser, conversation, setConversation } = useSession();
 
   // const { messages, setMessages } = useContext(ChatContext.messages);
   // const { recipientId, setPartnerId } = useContext(ChatContext.recipientId);
@@ -17,7 +17,7 @@ export default function Connections(props) {
 
     const connectionId = connection._id;
 
-    fetch(REACT_APP_API_URL + "/messages/" + connectionId, {
+    fetch(PORT_CONTACT_SERVER + "/messages/" + connectionId, {
       method: "GET",
       credentials: "include",
       "Access-Control-Allow-Origin": "https://port.contact/",
@@ -27,7 +27,10 @@ export default function Connections(props) {
         if (res.success === false) {
           console.log("Error fetching messages.");
         } else {
-          setConversation({ connection: connection, messages: res.messages });
+          setConversation({
+            connection: connection,
+            messages: res.messages,
+          }).then(console.log(conversation));
         }
       });
   };

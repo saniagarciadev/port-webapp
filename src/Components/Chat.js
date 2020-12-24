@@ -5,7 +5,7 @@ import { useSession } from "../Context/SessionContext";
 import { useSocket } from "../Context/SocketProvider";
 
 const {
-  REACT_APP_API_URL = "https://port-contact-server.herokuapp.com",
+  PORT_CONTACT_SERVER = "https://port-contact-server.herokuapp.com",
 } = process.env;
 
 export default function Chat(props) {
@@ -15,15 +15,7 @@ export default function Chat(props) {
   const chatBottom = useRef();
   const messageRef = useRef();
   const [chatHeight, setChatHeight] = useState("");
-  const socket = useSocket();
-
-  socket.on("new message", function (newMessage) {
-    setConversation(
-      setConversation((prev) => {
-        conversation.messages = [...prev.messages, newMessage];
-      })
-    );
-  });
+  const { socket } = useSocket();
 
   const scrollToBottom = () => {
     if (chatBottom.current) {
@@ -33,7 +25,7 @@ export default function Chat(props) {
 
   useEffect(() => {
     if (!user) {
-      fetch(REACT_APP_API_URL + "/", {
+      fetch(PORT_CONTACT_SERVER + "/", {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +50,7 @@ export default function Chat(props) {
     let windowHeight = window.innerHeight;
     setChatHeight(`${windowHeight - 180}px`);
     scrollToBottom();
-  }, [conversation]);
+  }, [conversation, setConversation]);
 
   const handleMessage = (e) => {
     e.preventDefault();
@@ -73,9 +65,9 @@ export default function Chat(props) {
       content: messageRef.current["message"].value,
     };
 
-    socket.emit("new message", messageData);
+    socket.emit("message", messageData);
 
-    // fetch(REACT_APP_API_URL + "/messages/" + conversation.connection._id, {
+    // fetch(PORT_CONTACT_SERVER + "/messages/" + conversation.connection._id, {
     //   method: "POST",
     //   headers: { "Content-Type": "application/json" },
     //   body: JSON.stringify(messageData),
@@ -91,7 +83,7 @@ export default function Chat(props) {
   };
 
   const deleteMessage = (m, index) => {
-    fetch(REACT_APP_API_URL + "/messages", {
+    fetch(PORT_CONTACT_SERVER + "/messages", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(m),
@@ -109,7 +101,7 @@ export default function Chat(props) {
             style={{ height: chatHeight }}
             ref={chatLog}
           >
-            {conversation &&
+            {conversation.messages.length &&
               conversation.messages.map((m, index) => (
                 <div
                   id={index}

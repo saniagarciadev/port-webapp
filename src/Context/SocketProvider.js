@@ -9,15 +9,31 @@ export function useSocket() {
 }
 
 export function SocketProvider({ children }) {
-  // const [socket, setSocket] = useState();
+  const [socket, setSocket] = useState(null);
+  const { user, conversation, setConversation } = useSession();
 
-  //   const { user, setUser, conversation, setConversation } = useSession();
+  useEffect(() => {
+    if (user) {
+      const newSocket = io("https://port-contact-server.herokuapp.com", {
+        query: user,
+        withCredentials: true,
+      });
+      setSocket(newSocket);
+    }
+  }, [user]);
 
-  const socket = io("https://port-contact-server.herokuapp.com", {
-    withCredentials: true,
+  socket.on("message", (newMessage) => {
+    setConversation((prev) => {
+      conversation.messages = [...prev.messages, newMessage];
+    });
   });
 
+  const values = {
+    socket,
+    setSocket,
+  };
+
   return (
-    <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
+    <SocketContext.Provider value={values}>{children}</SocketContext.Provider>
   );
 }

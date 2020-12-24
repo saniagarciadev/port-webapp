@@ -1,6 +1,5 @@
 import React, { useRef, useContext } from "react";
 import { useHistory } from "react-router-dom";
-
 import { useSession } from "../Context/SessionContext";
 
 export default function LogIn() {
