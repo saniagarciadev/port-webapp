@@ -13,7 +13,9 @@ export function SocketProvider({ children }) {
 
   //   const { user, setUser, conversation, setConversation } = useSession();
 
-  const socket = io();
+  const socket = io("https://port-contact-server.herokuapp.com", {
+    withCredentials: true,
+  });
 
   return (
     <SocketContext.Provider value={socket}>{children}</SocketContext.Provider>
