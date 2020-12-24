@@ -11,8 +11,8 @@ import { SocketProvider } from "./Context/SocketProvider";
 function App() {
   return (
     <div className="App">
-      <SocketProvider>
-        <SessionProvider>
+      <SessionProvider>
+        <SocketProvider>
           <NavBar />
           <Route exact path="/">
             <div className="user-selection">
@@ -23,8 +23,8 @@ function App() {
           <Route exact path="/chat">
             <Chat />
           </Route>
-        </SessionProvider>
-      </SocketProvider>
+        </SocketProvider>
+      </SessionProvider>
     </div>
   );
 }
