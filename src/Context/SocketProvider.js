@@ -19,14 +19,14 @@ export function SocketProvider({ children }) {
         withCredentials: true,
       });
       setSocket(newSocket);
+      socket.on("message", (newMessage) => {
+        setConversation((prev) => {
+          conversation.messages = [...prev.messages, newMessage];
+          console.log(newMessage);
+        });
+      });
     }
   }, [user]);
-
-  socket.on("message", (newMessage) => {
-    setConversation((prev) => {
-      conversation.messages = [...prev.messages, newMessage];
-    });
-  });
 
   const values = {
     socket,
