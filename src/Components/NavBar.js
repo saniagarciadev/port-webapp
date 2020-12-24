@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory, Link } from "react-router-dom";
 import { useSession } from "../Context/SessionContext";
-import { useSocket } from "../Context/SocketContext";
+import { useSocket } from "../Context/SocketProvider";
 import Connections from "./Connections";
 const {
   PORT_CONTACT_SERVER = "https://port-contact-server.herokuapp.com",

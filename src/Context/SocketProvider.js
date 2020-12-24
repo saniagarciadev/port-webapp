@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 import React, { useContext, useState, useEffect } from "react";
-import { useSession } from "../Context/SessionContext";
+import { useSession } from "./SessionContext";
 
 const SocketContext = React.createContext();
 
