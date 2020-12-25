@@ -18,13 +18,13 @@ export default function LogIn() {
     };
     console.log(loginData);
 
-    fetch("https://port-contact-server.herokuapp.com/login", {
+    fetch("http://localhost:4000/login", {
       method: "POST",
       body: JSON.stringify(loginData),
       headers: {
         "Content-Type": "application/json",
       },
-      // "Access-Control-Allow-Origin": "https://port.contact/",
+      // "Access-Control-Allow-Origin": "http://localhost:4000/",
       credentials: "include",
     })
       .then((res) => res.json())

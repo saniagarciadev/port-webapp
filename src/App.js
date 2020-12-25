@@ -6,7 +6,7 @@ import Chat from "./Components/Chat";
 import Register from "./Components/Register";
 import LogIn from "./Components/LogIn";
 import { SessionProvider } from "./Context/SessionContext";
-import { SocketProvider } from "./Context/SocketProvider";
+import { SocketProvider } from "./Context/SocketContext";
 
 function App() {
   return (

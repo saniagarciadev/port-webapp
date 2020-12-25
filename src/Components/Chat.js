@@ -2,11 +2,9 @@ import React, { useState, useRef, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import "../App.css";
 import { useSession } from "../Context/SessionContext";
-import { useSocket } from "../Context/SocketProvider";
+import { useSocket } from "../Context/SocketContext";
 
-const {
-  PORT_CONTACT_SERVER = "https://port-contact-server.herokuapp.com",
-} = process.env;
+const { PORT_CONTACT_SERVER = "http://localhost:4000" } = process.env;
 
 export default function Chat(props) {
   const history = useHistory();
@@ -15,7 +13,7 @@ export default function Chat(props) {
   const chatBottom = useRef();
   const messageRef = useRef();
   const [chatHeight, setChatHeight] = useState("");
-  // const { socket } = useSocket();
+  const { socket } = useSocket();
 
   const scrollToBottom = () => {
     if (chatBottom.current) {
@@ -30,7 +28,7 @@ export default function Chat(props) {
         headers: {
           "Content-Type": "application/json",
         },
-        // "Access-Control-Allow-Origin": "https://port.contact/",
+        "Access-Control-Allow-Origin": "http://localhost:4000/",
       })
         .then((res) => res.json())
         .then((res) => {
@@ -65,7 +63,7 @@ export default function Chat(props) {
       content: messageRef.current["message"].value,
     };
 
-    // socket.emit("message", messageData);
+    socket.emit("message", messageData);
 
     // fetch(PORT_CONTACT_SERVER + "/messages/" + conversation.connection._id, {
     //   method: "POST",
@@ -101,26 +99,27 @@ export default function Chat(props) {
             style={{ height: chatHeight }}
             ref={chatLog}
           >
-            {conversation.messages.length &&
-              conversation.messages.map((m, index) => (
-                <div
-                  id={index}
-                  className={
-                    user._id === m.senderId
-                      ? "my-message-line"
-                      : "their-message-line"
-                  }
-                >
+            {conversation
+              ? conversation.messages.map((m, index) => (
                   <div
+                    id={index}
                     className={
-                      user._id === m.senderId ? "my-message" : "their-message"
+                      user._id === m.senderId
+                        ? "my-message-line"
+                        : "their-message-line"
                     }
-                    onClick={() => deleteMessage(m, index)}
                   >
-                    {m.content}
+                    <div
+                      className={
+                        user._id === m.senderId ? "my-message" : "their-message"
+                      }
+                      onClick={() => deleteMessage(m, index)}
+                    >
+                      {m.content}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              : ""}
             <div ref={chatBottom}></div>
           </div>
 

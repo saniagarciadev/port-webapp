@@ -24,12 +24,12 @@ export default function Register() {
 
     console.log(userData);
 
-    fetch("https://port-contact-server.herokuapp.com/register", {
+    fetch("http://localhost:4000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      // "Access-Control-Allow-Origin": "https://port.contact/",
+      // "Access-Control-Allow-Origin": "http://localhost:4000/",
       credentials: "include",
       body: JSON.stringify(userData),
     })

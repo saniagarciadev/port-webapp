@@ -20,7 +20,7 @@ export default function AddConnection(props) {
       console.log(`User ${newContact.username} is already a contact.`);
     } else {
       console.log(`Request to add this contact: ${JSON.stringify(newContact)}`);
-      fetch("https://port-contact-server.herokuapp.com/connections", {
+      fetch("http://localhost:4000/connections", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
