@@ -3,7 +3,7 @@ import { useSession } from "../Context/SessionContext";
 import AddConnection from "./AddConnection";
 import { useSocket } from "../Context/SocketContext";
 const {
-  PORT_CONTACT_SERVER = "https://port-contact-server.herokuapp.com",
+  PORT_CONTACT_SERVER = "http://port-contact-server.herokuapp.com",
 } = process.env;
 
 export default function Contacts(props) {

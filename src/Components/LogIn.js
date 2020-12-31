@@ -26,7 +26,7 @@
 //       headers: {
 //         "Content-Type": "application/json",
 //       },
-//       "Access-Control-Allow-Origin": "https://port-contact-server.herokuapp.com/",
+//       "Access-Control-Allow-Origin": "http://port-contact-server.herokuapp.com/",
 //       credentials: "include",
 //     })
 //       .then((res) => res.json())
