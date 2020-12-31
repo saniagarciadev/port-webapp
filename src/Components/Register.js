@@ -38,7 +38,7 @@ export default function Register() {
 
     // console.log(usernameInput);
 
-    fetch("http://port-contact-server.herokuapp.com/login/username", {
+    fetch("https://port-contact-server.herokuapp.com/login/username", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -79,7 +79,7 @@ export default function Register() {
       };
       // console.log(loginData);
 
-      fetch("http://port-contact-server.herokuapp.com/login", {
+      fetch("https://port-contact-server.herokuapp.com/login", {
         method: "POST",
         body: JSON.stringify(loginData),
         headers: {
@@ -114,7 +114,7 @@ export default function Register() {
       password: passwordInput,
       email: emailRef.current["email"].value,
     };
-    fetch("http://port-contact-server.herokuapp.com/register", {
+    fetch("https://port-contact-server.herokuapp.com/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 const {
-  PORT_CONTACT_SERVER = "http://port-contact-server.herokuapp.com",
+  PORT_CONTACT_SERVER = "https://port-contact-server.herokuapp.com",
 } = process.env;
 
 const SessionContext = React.createContext();
@@ -78,7 +78,7 @@ export function SessionProvider({ children }) {
   //       headers: {
   //         "Content-Type": "application/json",
   //       },
-  //       "Access-Control-Allow-Origin": "http://port-contact-server.herokuapp.com/",
+  //       "Access-Control-Allow-Origin": "https://port-contact-server.herokuapp.com/",
   //     })
   //       .then((res) => res.json())
   //       .then((res) => {

@@ -4,7 +4,7 @@ import { useSession } from "../Context/SessionContext";
 import { useSocket } from "../Context/SocketContext";
 import Contacts from "./Contacts";
 const {
-  PORT_CONTACT_SERVER = "http://port-contact-server.herokuapp.com",
+  PORT_CONTACT_SERVER = "https://port-contact-server.herokuapp.com",
 } = process.env;
 
 export default function NavBar() {
