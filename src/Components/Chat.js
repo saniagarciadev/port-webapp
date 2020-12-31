@@ -4,7 +4,9 @@ import "../App.css";
 import { useSession } from "../Context/SessionContext";
 import { useSocket } from "../Context/SocketContext";
 
-const { PORT_CONTACT_SERVER = "http://localhost:4000" } = process.env;
+const {
+  PORT_CONTACT_SERVER = "https://port-contact-server.herokuapp.com",
+} = process.env;
 
 export default function Chat(props) {
   const history = useHistory();
@@ -41,7 +43,8 @@ export default function Chat(props) {
         headers: {
           "Content-Type": "application/json",
         },
-        "Access-Control-Allow-Origin": "http://localhost:4000/",
+        "Access-Control-Allow-Origin":
+          "https://port-contact-server.herokuapp.com/",
       })
         .then((res) => res.json())
         .then((res) => {

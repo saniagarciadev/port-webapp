@@ -28,10 +28,10 @@ export function SocketProvider({ children }) {
   // }, [user]);
 
   const startSocketConnection = (userObj) => {
-    // console.log(`Connecting to socket http://localhost:4000`);
+    // console.log(`Connecting to socket https://port-contact-server.herokuapp.com`);
     // const generalSocket = ;
     setSocket(
-      io(`http://localhost:4000/chat`, {
+      io(`https://port-contact-server.herokuapp.com/chat`, {
         query: userObj,
         withCredentials: true,
       })

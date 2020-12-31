@@ -38,12 +38,12 @@ export default function Register() {
 
     // console.log(usernameInput);
 
-    fetch("http://localhost:4000/login/username", {
+    fetch("https://port-contact-server.herokuapp.com/login/username", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      // "Access-Control-Allow-Origin": "http://localhost:4000/",
+      // "Access-Control-Allow-Origin": "https://port-contact-server.herokuapp.com/",
       credentials: "include",
       body: JSON.stringify({ username: username }),
     })
@@ -79,13 +79,14 @@ export default function Register() {
       };
       // console.log(loginData);
 
-      fetch("http://localhost:4000/login", {
+      fetch("https://port-contact-server.herokuapp.com/login", {
         method: "POST",
         body: JSON.stringify(loginData),
         headers: {
           "Content-Type": "application/json",
         },
-        "Access-Control-Allow-Origin": "http://localhost:4000/",
+        "Access-Control-Allow-Origin":
+          "https://port-contact-server.herokuapp.com/",
         credentials: "include",
       })
         .then((res) => res.json())
@@ -114,12 +115,12 @@ export default function Register() {
       password: passwordInput,
       email: emailRef.current["email"].value,
     };
-    fetch("http://localhost:4000/register", {
+    fetch("https://port-contact-server.herokuapp.com/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      // "Access-Control-Allow-Origin": "http://localhost:4000/",
+      // "Access-Control-Allow-Origin": "https://port-contact-server.herokuapp.com/",
       credentials: "include",
       body: JSON.stringify(registerData),
     })

@@ -20,13 +20,13 @@
 //     };
 //     // console.log(loginData);
 
-//     fetch("http://localhost:4000/login", {
+//     fetch("https://port-contact-server.herokuapp.com/login", {
 //       method: "POST",
 //       body: JSON.stringify(loginData),
 //       headers: {
 //         "Content-Type": "application/json",
 //       },
-//       "Access-Control-Allow-Origin": "http://localhost:4000/",
+//       "Access-Control-Allow-Origin": "https://port-contact-server.herokuapp.com/",
 //       credentials: "include",
 //     })
 //       .then((res) => res.json())
