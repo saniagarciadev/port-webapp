@@ -15,10 +15,7 @@ function App() {
         <SocketProvider>
           <NavBar />
           <Route exact path="/">
-            <div className="user-selection">
-              <LogIn />
-              <Register />
-            </div>
+            <Register />
           </Route>
           <Route exact path="/chat">
             <Chat />

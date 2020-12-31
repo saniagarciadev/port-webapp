@@ -2,6 +2,80 @@ body {
   text-align: center;
   color: white;
   background-color: black;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@font-face {
+  font-family: "arista_pro_triallight";
+  src: url("./utils/webfontkit/arista-pro-light-trial-webfont.woff2")
+      format("woff2"),
+    url("./utils/webfontkit/arista-pro-light-trial-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+::-webkit-scrollbar-track {
+  /* -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); */
+  background-color: black;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: #f5f5f5;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  background-color: #1b1b1b;
+  /* border: 2px solid #555555; */
+}
+
+.login-area input {
+  /* text-align: right; */
+  padding: 5px 40px;
+  text-align: center;
+  border: 2px solid rgb(37, 37, 37);
+  background-color: rgb(37, 37, 37);
+  border-radius: 5px;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 25px;
+  width: 400px;
+}
+.login-area input:focus {
+  outline: none;
+}
+
+.later-input {
+  position: relative;
+  top: -60px;
+}
+
+.go-back {
+  cursor: pointer;
+  width: 40px;
+  height: 20px;
+  margin: auto;
+  padding: 20px;
+}
+
+.login-input {
+  position: relative;
+  margin-top: 60vh;
+}
+
+.show-login-input {
+  display: block;
+}
+
+.hide-login-input {
+  display: none;
 }
 
 .app-nav {
@@ -13,6 +87,7 @@ body {
   height: 80px;
   width: 100%;
   top: 0;
+  z-index: 2;
 }
 
 .app-nav a:visited {
@@ -21,40 +96,178 @@ body {
 }
 
 .app-title {
+  /* position: fixed;
+  top: 50px; */
+  margin: 50px auto;
   display: inline-block;
-  /* margin: auto; */
+  letter-spacing: 2px;
+  font-weight: normal;
+  text-align: center;
+  color: rgb(255, 189, 158);
+  font-family: "arista_pro_triallight";
+  /* font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  font-size: 35px;
 }
 
 .connections {
+  padding: 0px 20px 3px 20px;
+  border-radius: 10px;
+  background-color: black;
   display: flex;
   flex-direction: row;
   position: fixed;
-  left: 130px;
+  left: 20px;
   top: 15px;
-  /* margin: auto; */
-  height: 25px;
+  height: 55px;
 }
 
 .contact {
-  margin: auto 15px;
+  margin: 15px 15px 0px 15px;
+  border: 3px solid black;
+  transition: 0.4s;
+}
+
+.contact:hover {
+  cursor: pointer;
+}
+
+.online-contact {
+  border-radius: 50px;
+  color: rgb(255, 189, 158);
+}
+
+.live-contact {
+  color: black;
+  font-weight: bold;
+  font-style: italic;
+  padding: 0px 20px 3px 20px;
+  /* border: 2px solid rgb(37, 37, 37); */
+  border-radius: 5px;
+  background-color: rgb(255, 189, 158);
 }
 
 .add-contact {
+  display: flex;
+  flex-direction: row;
   color: white;
+  margin: 4px 5px 0px 15px;
+  border: 3px solid black;
   /* display: inline-block; */
   /* position: fixed; */
   /* right: 150px; */
   /* top: 35px; */
-  margin: auto 15px;
-
-  margin-top: 17px;
+  /* margin: auto 15px; */
+  /* margin-top: 17px; */
   height: 25px;
+}
+
+.add-contact button {
+  display: inline-block;
+  color: grey;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  margin-top: 12px;
+  /* margin-right: 5px; */
+  opacity: 60%;
+  transition: 0.4s;
+}
+
+.add-contact button:hover {
+  cursor: pointer;
+  opacity: 90%;
+}
+
+.add-title {
+  cursor: pointer;
+  position: relative;
+  top: -7px;
+  left: -18px;
+  transition: 0.4s;
+}
+.add-title-off {
+  display: none;
+}
+.add-title-on {
+  display: inline-block;
+}
+
+.add-contact input {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 15px;
+}
+
+#add-contact-field {
+  position: relative;
+  top: -5px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 25px;
+  /* margin: 0px; */
+  padding: 5px 15px;
+  border-radius: 50px;
+  border: none;
+  transition: 0.4s;
+}
+#add-contact-field:focus {
+  outline: none;
+}
+#add-contact-field::placeholder {
+  color: rgb(121, 121, 121);
+}
+
+.show-add {
+  width: 160px;
+  color: white;
+  border: solid 1px rgb(43, 43, 43);
+  background-color: rgb(43, 43, 43);
+}
+
+.hide-add {
+  background: none;
+  width: 0px;
+  border: none;
+}
+
+#close-add {
+  display: inline-block;
 }
 
 .logout-button {
   position: fixed;
-  right: 130px;
-  top: 35px;
+  right: 30px;
+  height: 22px;
+  top: 37px;
+  margin: auto 15px;
+  /* border: 3px solid black; */
+  opacity: 40%;
+  transition: 0.4s;
+}
+.logout-button:hover {
+  cursor: pointer;
+  opacity: 60%;
+}
+
+.logout-text {
+  cursor: pointer;
+  position: relative;
+  top: -7px;
+  left: -8px;
+  transition: 0.4s;
+}
+
+.show-logout {
+  opacity: 60%;
+}
+
+.hide-logout {
+  opacity: 0%;
 }
 
 .register-form {
@@ -86,23 +299,28 @@ body {
 }
 
 .Chat {
-  overflow-y: hidden;
-  height: 100%;
+  position: absolute;
+  bottom: 80;
+  width: 100%;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column-reverse;
+  overflow-y: scroll;
 }
 
 .chat-log {
-  margin-top: 80px;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  overflow-y: scroll;
+  flex: 1;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
   overflow-wrap: break-word;
+  list-style: none;
 }
 
 .my-message-line {
   text-align: right;
   white-space: pre;
-  padding-right: 175px;
+  padding-right: 308px;
 }
 
 .my-message {
@@ -114,11 +332,12 @@ body {
   margin-bottom: 8px;
   padding: 5px 40px;
   border: 2px solid rgb(37, 37, 37);
-  border-radius: 50px;
+  background-color: rgb(37, 37, 37);
+  border-radius: 5px;
 }
 
 .their-message-line {
-  padding-left: 175px;
+  padding-left: 240px;
 }
 
 .their-message {
@@ -129,48 +348,48 @@ body {
   min-height: 21px;
   margin-bottom: 8px;
   padding: 5px 40px;
-  border: 2px solid grey;
-  background-color: rgb(37, 37, 37);
-  border-radius: 50px;
+  border: 2px solid rgb(37, 37, 37);
+  border-radius: 5px;
 }
 
-#message-form {
-  text-align: right;
+.message-form {
+  /* text-align: right; */
   /* white-space: pre; */
   position: fixed;
   width: 100%;
   height: 100px;
   bottom: 0;
-  left: -50px;
+  left: -20px;
   padding-right: 50px;
 }
 
-#message-form input {
-  /* justify-self: right; */
-  width: 700px;
-  margin: 0px 20px;
-  border-radius: 50px;
-  padding: 10px 30px;
+.message-input {
+  /* text-align: right; */
+  padding: 5px 40px;
+  border: 2px solid rgb(37, 37, 37);
+  background-color: rgb(37, 37, 37);
+  border-radius: 5px;
+  color: white;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-size: 25px;
+  width: 400px;
+}
+.message-input:focus {
+  outline: none;
 }
 
 #message-form input:focus {
   outline: none;
 }
 
-#message-form button {
-  position: relative;
-  left: -30px;
-  top: 8px;
-  /* font-size: 1.8em; */
-  margin: 20px;
-  border-radius: 50px;
-  padding: 7px 30px;
+.chat-bottom {
+  height: 100px;
+  width: 100%;
 }
 
-#message-form button:focus {
-  outline: none;
-}
-
-.hidden {
+/* .hidden {
   display: none;
-}
+} */
