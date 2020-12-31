@@ -17,7 +17,7 @@ export default function NavBar() {
     history.push("/");
     fetch(PORT_CONTACT_SERVER + "/logout", {
       credentials: "include",
-      "Access-Control-Allow-Origin": "https://port.contact/",
+      "Access-Control-Allow-Origin": "http://port.contact/",
     })
       .then((res) => res.json())
       .then((res) => {
