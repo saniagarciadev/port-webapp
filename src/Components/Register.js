@@ -43,7 +43,7 @@ export default function Register() {
       headers: {
         "Content-Type": "application/json",
       },
-      // "Access-Control-Allow-Origin": "https://port-contact-server.herokuapp.com/",
+      "Access-Control-Allow-Origin": "https://port.contact/",
       credentials: "include",
       body: JSON.stringify({ username: username }),
     })
@@ -85,8 +85,7 @@ export default function Register() {
         headers: {
           "Content-Type": "application/json",
         },
-        "Access-Control-Allow-Origin":
-          "https://port-contact-server.herokuapp.com/",
+        "Access-Control-Allow-Origin": "https://port.contact/",
         credentials: "include",
       })
         .then((res) => res.json())
@@ -120,7 +119,7 @@ export default function Register() {
       headers: {
         "Content-Type": "application/json",
       },
-      // "Access-Control-Allow-Origin": "https://port-contact-server.herokuapp.com/",
+      "Access-Control-Allow-Origin": "https://port.contact/",
       credentials: "include",
       body: JSON.stringify(registerData),
     })

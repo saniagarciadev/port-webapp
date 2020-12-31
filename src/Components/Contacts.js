@@ -39,8 +39,7 @@ export default function Contacts(props) {
     fetch(PORT_CONTACT_SERVER + "/messages/" + contact._id, {
       method: "GET",
       credentials: "include",
-      "Access-Control-Allow-Origin":
-        "https://port-contact-server.herokuapp.com/",
+      "Access-Control-Allow-Origin": "https://port.contact/",
     })
       .then((res) => res.json())
       .then((res) => {
