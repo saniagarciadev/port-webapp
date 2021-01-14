@@ -1,8 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-const {
-  PORT_CONTACT_SERVER = "https://port-contact-server.herokuapp.com",
-} = process.env;
 
 const SessionContext = React.createContext();
 
@@ -73,12 +70,12 @@ export function SessionProvider({ children }) {
 
   // useEffect(() => {
   //   if (!user) {
-  //     fetch(PORT_CONTACT_SERVER, {
+  //     fetch(process.env.REACT_APP_PORT_SERVER, {
   //       credentials: "include",
   //       headers: {
   //         "Content-Type": "application/json",
   //       },
-  //       "Access-Control-Allow-Origin": "https://port-contact-server.herokuapp.com/",
+  //       "Access-Control-Allow-Origin": process.env.REACT_APP_PORT_SERVER,
   //     })
   //       .then((res) => res.json())
   //       .then((res) => {
@@ -100,11 +97,11 @@ export function SessionProvider({ children }) {
 
   // useEffect(() => {
   //   if (!user) {
-  //     fetch("https://port-contact-server.herokuapp.com/", {
+  //     fetch("process.env.REACT_APP_PORT_SERVER/", {
   //       method: "GET",
   //       credentials: "include",
   //       headers: { "Content-Type": "application/json" },
-  //       "Access-Control-Allow-Origin": "https://port-contact-server.herokuapp.com/",
+  //       "Access-Control-Allow-Origin": "process.env.REACT_APP_PORT_SERVER/",
   //     })
   //       .then((res) => res.json())
   //       .then((res) => {

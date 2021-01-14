@@ -4,10 +4,6 @@ import "../App.css";
 import { useSession } from "../Context/SessionContext";
 import { useSocket } from "../Context/SocketContext";
 
-const {
-  PORT_CONTACT_SERVER = "https://port-contact-server.herokuapp.com",
-} = process.env;
-
 export default function Chat(props) {
   const history = useHistory();
   const {
@@ -38,7 +34,7 @@ export default function Chat(props) {
 
   useEffect(() => {
     if (!user) {
-      fetch(PORT_CONTACT_SERVER, {
+      fetch(process.env.REACT_APP_PORT_SERVER, {
         credentials: "include",
         headers: {
           "Content-Type": "application/json",
@@ -96,7 +92,7 @@ export default function Chat(props) {
 
     messageRef.current["message"].value = "";
 
-    // fetch(PORT_CONTACT_SERVER + "/messages/" + conversation.connection._id, {
+    // fetch(process.env.REACT_APP_PORT_SERVER + "/messages/" + conversation.connection._id, {
     //   method: "POST",
     //   headers: { "Content-Type": "application/json" },
     //   body: JSON.stringify(messageData),
@@ -110,7 +106,7 @@ export default function Chat(props) {
   };
 
   // const deleteMessage = (m, index) => {
-  //   fetch(PORT_CONTACT_SERVER + "/messages", {
+  //   fetch(process.env.REACT_APP_PORT_SERVER + "/messages", {
   //     method: "DELETE",
   //     headers: { "Content-Type": "application/json" },
   //     body: JSON.stringify(m),

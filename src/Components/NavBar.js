@@ -3,9 +3,6 @@ import { useHistory } from "react-router-dom";
 import { useSession } from "../Context/SessionContext";
 import { useSocket } from "../Context/SocketContext";
 import Contacts from "./Contacts";
-const {
-  PORT_CONTACT_SERVER = "https://port-contact-server.herokuapp.com",
-} = process.env;
 
 export default function NavBar() {
   let history = useHistory();
@@ -15,7 +12,7 @@ export default function NavBar() {
 
   const handleLogout = async () => {
     history.push("/");
-    fetch(PORT_CONTACT_SERVER + "/logout", {
+    fetch(process.env.REACT_APP_PORT_SERVER + "/logout", {
       credentials: "include",
       "Access-Control-Allow-Origin": "http://port.contact/",
     })

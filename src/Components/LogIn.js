@@ -20,13 +20,13 @@
 //     };
 //     // console.log(loginData);
 
-//     fetch("https://port-contact-server.herokuapp.com/login", {
+//     fetch("process.env.REACT_APP_PORT_SERVER/login", {
 //       method: "POST",
 //       body: JSON.stringify(loginData),
 //       headers: {
 //         "Content-Type": "application/json",
 //       },
-//       "Access-Control-Allow-Origin": "https://port-contact-server.herokuapp.com/",
+//       "Access-Control-Allow-Origin": "process.env.REACT_APP_PORT_SERVER/",
 //       credentials: "include",
 //     })
 //       .then((res) => res.json())

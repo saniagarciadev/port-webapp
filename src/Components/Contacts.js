@@ -2,9 +2,6 @@ import React from "react";
 import { useSession } from "../Context/SessionContext";
 import AddConnection from "./AddConnection";
 import { useSocket } from "../Context/SocketContext";
-const {
-  PORT_CONTACT_SERVER = "https://port-contact-server.herokuapp.com",
-} = process.env;
 
 export default function Contacts(props) {
   const {
@@ -36,7 +33,7 @@ export default function Contacts(props) {
       // console.log(roomId);
     }
 
-    fetch(PORT_CONTACT_SERVER + "/messages/" + contact._id, {
+    fetch(process.env.REACT_APP_PORT_SERVER + "/messages/" + contact._id, {
       method: "GET",
       credentials: "include",
       "Access-Control-Allow-Origin": "http://port.contact/",
@@ -50,7 +47,7 @@ export default function Contacts(props) {
   };
 
   // const deleteConnection = (contact) => {
-  //   fetch("https://port-contact-server.herokuapp.com/connections/", {
+  //   fetch(`${process.env.REACT_APP_PORT_SERVER}/connections/`, {
   //     method: "DELETE",
   //     headers: { "Content-Type": "application/json" },
   //     credentials: "include",

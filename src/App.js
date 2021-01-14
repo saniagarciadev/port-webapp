@@ -4,7 +4,7 @@ import "./App.css";
 import NavBar from "./Components/NavBar";
 import Chat from "./Components/Chat";
 import Register from "./Components/Register";
-import LogIn from "./Components/LogIn";
+// import LogIn from "./Components/LogIn";
 import { SessionProvider } from "./Context/SessionContext";
 import { SocketProvider } from "./Context/SocketContext";
 
