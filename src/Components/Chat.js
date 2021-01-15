@@ -39,7 +39,7 @@ export default function Chat(props) {
         headers: {
           "Content-Type": "application/json",
         },
-        "Access-Control-Allow-Origin": "http://port.contact/",
+        // "Access-Control-Allow-Origin": "http://port.contact/",
       })
         .then((res) => res.json())
         .then((res) => {

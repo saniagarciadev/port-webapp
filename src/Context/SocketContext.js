@@ -31,7 +31,7 @@ export function SocketProvider({ children }) {
     // console.log(`Connecting to socket process.env.REACT_APP_PORT_SERVER`);
     // const generalSocket = ;
     setSocket(
-      io(`process.env.REACT_APP_PORT_SERVER/chat`, {
+      io(`${process.env.REACT_APP_PORT_SERVER}/chat`, {
         query: userObj,
         withCredentials: true,
       })

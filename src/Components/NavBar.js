@@ -42,7 +42,14 @@ export default function NavBar() {
   return (
     <div className="app-nav">
       {user && <Contacts />}
-      {!user && <h1 className="app-title">port</h1>}
+      {!user && (
+        <h1
+          className="app-title"
+          onClick={() => console.log(process.env.REACT_APP_PORT_SERVER)}
+        >
+          port
+        </h1>
+      )}
       {user && (
         <div
           onMouseEnter={() => setShowLogout(true)}
