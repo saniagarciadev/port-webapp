@@ -172,13 +172,13 @@ body {
   outline: none;
   margin-top: 12px;
   /* margin-right: 5px; */
-  opacity: 60%;
+  opacity: 0.6;
   transition: 0.4s;
 }
 
 .add-contact button:hover {
   cursor: pointer;
-  opacity: 90%;
+  opacity: 0.9;
 }
 
 .add-title {
@@ -246,12 +246,12 @@ body {
   top: 37px;
   margin: auto 15px;
   /* border: 3px solid black; */
-  opacity: 40%;
+  opacity: 0.4;
   transition: 0.4s;
 }
 .logout-button:hover {
   cursor: pointer;
-  opacity: 60%;
+  opacity: 0.6;
 }
 
 .logout-text {
@@ -263,11 +263,11 @@ body {
 }
 
 .show-logout {
-  opacity: 60%;
+  opacity: 0.6;
 }
 
 .hide-logout {
-  opacity: 0%;
+  opacity: 0;
 }
 
 .register-form {
