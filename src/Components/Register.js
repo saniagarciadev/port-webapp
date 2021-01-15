@@ -43,7 +43,7 @@ export default function Register() {
       headers: {
         "Content-Type": "application/json",
       },
-      "Access-Control-Allow-Origin": "http://port.contact/",
+      // "Access-Control-Allow-Origin": "http://port.contact/",
       credentials: "include",
       body: JSON.stringify({ username: username }),
     })
@@ -85,7 +85,7 @@ export default function Register() {
         headers: {
           "Content-Type": "application/json",
         },
-        "Access-Control-Allow-Origin": "http://port.contact/",
+        // "Access-Control-Allow-Origin": "http://port.contact/",
         credentials: "include",
       })
         .then((res) => res.json())
@@ -119,7 +119,7 @@ export default function Register() {
       headers: {
         "Content-Type": "application/json",
       },
-      "Access-Control-Allow-Origin": "http://port.contact/",
+      // "Access-Control-Allow-Origin": "http://port.contact/",
       credentials: "include",
       body: JSON.stringify(registerData),
     })
