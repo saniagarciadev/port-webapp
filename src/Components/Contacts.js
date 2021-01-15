@@ -31,19 +31,23 @@ export default function Contacts(props) {
         return { ...contact, roomId: userData.roomId };
       });
       // console.log(roomId);
+      socket.on("chat history", (messages) => {
+        console.log(messages);
+        setConversation(messages);
+      });
     }
 
-    fetch(process.env.REACT_APP_PORT_SERVER + "/messages/" + contact._id, {
-      method: "GET",
-      credentials: "include",
-      // "Access-Control-Allow-Origin": "http://port.contact/",
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        setConversation(res);
-        // console.log(res);
-      })
-      .catch((err) => console.log(err));
+    // fetch(process.env.REACT_APP_PORT_SERVER + "/messages/" + contact._id, {
+    //   method: "GET",
+    //   credentials: "include",
+    //   // "Access-Control-Allow-Origin": "http://port.contact/",
+    // })
+    //   .then((res) => res.json())
+    //   .then((res) => {
+    //     setConversation(res);
+    //     // console.log(res);
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   // const deleteConnection = (contact) => {
