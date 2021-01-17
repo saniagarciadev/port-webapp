@@ -37,6 +37,7 @@ body {
 
 .login-area input {
   /* text-align: right; */
+  margin: auto;
   padding: 5px 40px;
   text-align: center;
   border: 2px solid rgb(37, 37, 37);
@@ -49,6 +50,7 @@ body {
   -webkit-font-smoothing: antialiased;
   font-size: 25px;
   width: 400px;
+  max-width: 40vw;
 }
 .login-area input:focus {
   outline: none;
@@ -60,6 +62,7 @@ body {
 }
 
 .go-back {
+  display: block;
   cursor: pointer;
   width: 40px;
   height: 20px;
@@ -144,12 +147,6 @@ body {
   transition: 0.3s;
 }
 
-@media (hover: hover) {
-  .contact:hover {
-    border: 2px solid grey;
-  }
-}
-
 .selected-contact {
   /* padding: 0px 10px 3px 10px; */
   color: black;
@@ -166,17 +163,54 @@ body {
 }
 
 .online-contact {
-  color: rgb(255, 189, 158);
+  color: lightgrey;
+  border: 2px solid grey;
 }
 
 .live-contact {
-  color: black;
+  color: rgb(255, 189, 158);
+  /* font-weight: bold; */
+  /* font-style: italic; */
+  /* padding: 0px 20px 3px 20px; */
+  border: 2px solid rgb(255, 189, 158);
+  border-radius: 50px;
+  background-color: black;
+}
+
+.live-contact-open {
   font-weight: bold;
   font-style: italic;
   padding: 0px 20px 3px 20px;
-  /* border: 2px solid rgb(37, 37, 37); */
   border-radius: 5px;
+  color: black;
   background-color: rgb(255, 189, 158);
+}
+
+.online-contact-open {
+  color: rgb(255, 189, 158);
+  /* font-weight: bold; */
+  padding: 0px 20px 3px 20px;
+  border: 2px solid rgb(255, 189, 158);
+  border-radius: 5px;
+  background-color: black;
+}
+
+@media (hover: hover) {
+  .inactive-contact:hover {
+    border: 2px solid grey;
+  }
+  .online-contact:hover {
+    color: rgb(255, 189, 158);
+    border: 2px solid rgb(255, 189, 158);
+  }
+  .online-contact-open {
+    border: 2px solid rgb(255, 189, 158);
+  }
+  .live-contact:hover {
+    color: black;
+    border: 2px solid rgb(255, 189, 158);
+    background-color: rgb(255, 189, 158);
+  }
 }
 
 .add-contact {
@@ -381,6 +415,20 @@ body {
   opacity: 0;
 }
 
+.menu-login-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 34px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  padding: 0 10px;
+  color: grey;
+  transition: 0.4s;
+}
+
 .menu-window p {
   color: white;
   text-decoration: none;
@@ -390,6 +438,12 @@ body {
 }
 
 .hide-menu-window p {
+  font-size: 0px;
+  padding: 0px;
+  opacity: 0;
+}
+
+.hide-menu-window div {
   font-size: 0px;
   padding: 0px;
   opacity: 0;
@@ -449,6 +503,7 @@ body {
   position: absolute;
   bottom: 80;
   width: 100%;
+  height: 100vh;
   margin-top: 80px;
   display: flex;
   align-items: center;
@@ -494,6 +549,11 @@ body {
   background-color: rgb(37, 37, 37);
   border-radius: 5px;
 }
+.chat-log-live {
+  color: rgb(255, 189, 158);
+  /* border: 0.01px solid rgb(255, 189, 158); */
+  /* background-color: rgb(24, 24, 24); */
+}
 
 .their-message {
   /* text-align: left; */
@@ -518,7 +578,7 @@ body {
 
 .their-live-text {
   font-size: 25px;
-  color: white;
+  color: rgb(255, 189, 158);
   width: fit-content;
   max-width: 50%;
   min-height: 21px;
@@ -561,6 +621,13 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   pointer-events: auto;
+  transition: 0.4s;
+}
+
+.live-message-input {
+  border: 1px solid rgb(255, 189, 158);
+  background-color: black;
+  color: rgb(255, 189, 158);
 }
 
 /* @media (max-width: 700px) {

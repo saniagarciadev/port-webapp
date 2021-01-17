@@ -12,7 +12,6 @@ export function SessionProvider({ children }) {
   const [conversation, setConversation] = useState(null);
   const [contactsList, setContactsList] = useState(null);
   const [currConversation, setCurrConversation] = useState("");
-  const [myLiveText, setMyLiveText] = useState("");
   const [theirLiveText, setTheirLiveText] = useState("");
   // let history = useHistory();
 
@@ -129,8 +128,6 @@ export function SessionProvider({ children }) {
     updateLiveStatus,
     currConversation,
     setCurrConversation,
-    myLiveText,
-    setMyLiveText,
     theirLiveText,
     setTheirLiveText,
   };

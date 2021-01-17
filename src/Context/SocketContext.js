@@ -14,12 +14,13 @@ export function SocketProvider({ children }) {
     user,
     contactsList,
     setConversation,
+    currConversation,
     updateOnlineStatus,
     updateLiveStatus,
     theirLiveText,
     setTheirLiveText,
   } = useSession();
-  const [theirLiveCursor, setTheirLiveCursor] = useState(0);
+  // const [theirLiveCursor, setTheirLiveCursor] = useState(0);
 
   const startSocketConnection = (userObj) => {
     setSocket(
@@ -82,6 +83,9 @@ export function SocketProvider({ children }) {
       });
 
       socket.on("message", (msg) => {
+        if (theirLiveText) {
+          setTheirLiveText("");
+        }
         setConversation((prevConversation) => [msg, ...prevConversation]);
       });
       socket.on("live text", async (liveText) => {

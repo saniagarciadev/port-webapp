@@ -13,13 +13,11 @@ export default function Chat(props) {
     conversation,
     setConversation,
     currConversation,
-    // myLiveText,
-    // setMyLiveText,
     theirLiveText,
   } = useSession();
   const chatBottom = useRef();
   const messageRef = useRef();
-  const [chatHeight, setChatHeight] = useState("");
+  // const [chatHeight, setChatHeight] = useState("");
   const { socket, startSocketConnection } = useSocket();
 
   const scrollToBottom = () => {
@@ -59,8 +57,8 @@ export default function Chat(props) {
         .catch((err) => console.log(err));
     }
 
-    let windowHeight = window.innerHeight;
-    setChatHeight(`${windowHeight}px`);
+    // let windowHeight = window.innerHeight;
+    // setChatHeight(`${windowHeight}px`);
   }, []);
 
   useEffect(() => {
@@ -69,7 +67,6 @@ export default function Chat(props) {
 
   const handleMessage = (e) => {
     e.preventDefault();
-
     if (!messageRef.current["message"].value) {
       return;
     }
@@ -91,13 +88,23 @@ export default function Chat(props) {
     socket.emit("live text", e.target.value);
   };
 
+  const messageClass = (m) => {
+    if (currConversation.isLive && user._id === m.senderId) {
+      return "my-message";
+    } else if (user._id === m.senderId) {
+      return "my-message";
+    } else {
+      return "their-message";
+    }
+  };
+
   return (
-    <div className="Chat" style={{ height: chatHeight }}>
+    <div className="Chat">
       <div ref={chatBottom}></div>
       {conversation && (
         <ul className="chat-log">
           <div className="chat-bottom"></div>
-          {theirLiveText && (
+          {currConversation.isLive && theirLiveText && (
             <li>
               <div className="their-live-text">{theirLiveText}</div>
             </li>
@@ -111,13 +118,7 @@ export default function Chat(props) {
                   : "their-message-line"
               }
             >
-              <div
-                className={
-                  user._id === m.senderId ? "my-message" : "their-message"
-                }
-              >
-                {m.content}
-              </div>
+              <div className={user && messageClass(m)}>{m.content}</div>
             </li>
           ))}
         </ul>
@@ -125,9 +126,13 @@ export default function Chat(props) {
       <form onSubmit={handleMessage} className="message-form" ref={messageRef}>
         <input
           onChange={(e) => {
-            handleLiveText(e);
+            currConversation.isLive && handleLiveText(e);
           }}
-          className="message-input"
+          className={
+            currConversation.isLive
+              ? "message-input live-message-input"
+              : "message-input"
+          }
           name="message"
           autoComplete="off"
         ></input>

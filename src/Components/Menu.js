@@ -66,6 +66,7 @@ export default function Menu(props) {
             : "menu-window hide-menu-window"
         }
       >
+        <div className="menu-login-info">Logged in as {user.username}</div>
         <p href="#">Options</p>
         <p href="#">About</p>
         <p onClick={handleLogout} href="#">
