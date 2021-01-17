@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 const SessionContext = React.createContext();
 
@@ -12,7 +12,9 @@ export function SessionProvider({ children }) {
   const [conversation, setConversation] = useState(null);
   const [contactsList, setContactsList] = useState(null);
   const [currConversation, setCurrConversation] = useState("");
-  let history = useHistory();
+  const [myLiveText, setMyLiveText] = useState("");
+  const [theirLiveText, setTheirLiveText] = useState("");
+  // let history = useHistory();
 
   const createContactsList = (contactsArray) => {
     const startingList = contactsArray.map((contact) => {
@@ -127,6 +129,10 @@ export function SessionProvider({ children }) {
     updateLiveStatus,
     currConversation,
     setCurrConversation,
+    myLiveText,
+    setMyLiveText,
+    theirLiveText,
+    setTheirLiveText,
   };
 
   return (

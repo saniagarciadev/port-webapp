@@ -10,26 +10,18 @@ export function useSocket() {
 
 export function SocketProvider({ children }) {
   const [socket, setSocket] = useState(null);
-  // const [contactNS, setContactNS] = useState(null);
   const {
     user,
     contactsList,
-    // conversation,
     setConversation,
     updateOnlineStatus,
     updateLiveStatus,
-    // currConversation,
+    theirLiveText,
+    setTheirLiveText,
   } = useSession();
-
-  // useEffect(() => {
-  //   if (user) {
-  //     startSocketConnection(user);
-  //   }
-  // }, [user]);
+  const [theirLiveCursor, setTheirLiveCursor] = useState(0);
 
   const startSocketConnection = (userObj) => {
-    // console.log(`Connecting to socket process.env.REACT_APP_PORT_SERVER`);
-    // const generalSocket = ;
     setSocket(
       io(`${process.env.REACT_APP_PORT_SERVER}/chat`, {
         query: userObj,
@@ -91,7 +83,9 @@ export function SocketProvider({ children }) {
 
       socket.on("message", (msg) => {
         setConversation((prevConversation) => [msg, ...prevConversation]);
-        // console.log(msg);
+      });
+      socket.on("live text", async (liveText) => {
+        setTheirLiveText(liveText);
       });
     }
   }, [socket]);

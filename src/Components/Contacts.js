@@ -1,6 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSession } from "../Context/SessionContext";
-import AddConnection from "./AddConnection";
 import { useSocket } from "../Context/SocketContext";
 
 export default function Contacts(props) {
@@ -14,6 +13,7 @@ export default function Contacts(props) {
     setCurrConversation,
   } = useSession();
   const { socket } = useSocket();
+  const [selectedContact, setSelectedContact] = useState("");
 
   const openConversation = async (contact) => {
     if (currConversation.username !== contact.username) {
@@ -31,10 +31,11 @@ export default function Contacts(props) {
         return { ...contact, roomId: userData.roomId };
       });
       // console.log(roomId);
-      socket.on("chat history", (messages) => {
+      socket.once("chat history", (messages) => {
         console.log(messages);
         setConversation(messages);
       });
+      setSelectedContact(contact._id);
     }
 
     // fetch(process.env.REACT_APP_PORT_SERVER + "/messages/" + contact._id, {
@@ -78,36 +79,26 @@ export default function Contacts(props) {
 
   const contactClass = (contact) => {
     if (contact.isLive) {
-      return "live-contact";
+      return "contact live-contact";
     } else if (contact.isOnline) {
-      return "online-contact";
+      return "contact online-contact";
+    } else if (contact._id === selectedContact) {
+      return "contact selected-contact";
     } else {
-      return "";
+      return "contact inactive-contact";
     }
   };
 
   return (
     <div className="connections">
-      {/* <button onClick={() => console.log(socket.id, contactsList)}>
-        Log list
-      </button> */}
-      <AddConnection />
       {contactsList &&
         contactsList.map((contact, index) => (
-          <div key={index} className="contact">
-            <span
-              onClick={() => openConversation(contact)}
-              className={contactClass(contact)}
-            >
-              {contact.username}
-            </span>
-            {/* <button
-              className="delete-user-button"
-              onClick={() => deleteConnection(contact)}
-            >
-              x
-            </button> */}
-          </div>
+          <span
+            onClick={() => openConversation(contact)}
+            className={contactClass(contact)}
+          >
+            {contact.username}
+          </span>
         ))}
     </div>
   );

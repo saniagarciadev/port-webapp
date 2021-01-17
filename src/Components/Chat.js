@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useContext } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "../App.css";
 import { useSession } from "../Context/SessionContext";
@@ -13,8 +13,10 @@ export default function Chat(props) {
     conversation,
     setConversation,
     currConversation,
+    // myLiveText,
+    // setMyLiveText,
+    theirLiveText,
   } = useSession();
-  // const chatLog = useRef();
   const chatBottom = useRef();
   const messageRef = useRef();
   const [chatHeight, setChatHeight] = useState("");
@@ -56,14 +58,6 @@ export default function Chat(props) {
         })
         .catch((err) => console.log(err));
     }
-    // else if (user && !socket) {
-    //   console.log(
-    //     `User ${user.username} remains authenticated from previous visit.`
-    //   );
-    //   startSocketConnection(user);
-    // } else if (!user) {
-    //   history.push("/");
-    // }
 
     let windowHeight = window.innerHeight;
     setChatHeight(`${windowHeight}px`);
@@ -91,37 +85,23 @@ export default function Chat(props) {
     socket.emit("message", messageData, roomId);
 
     messageRef.current["message"].value = "";
-
-    // fetch(process.env.REACT_APP_PORT_SERVER + "/messages/" + conversation.connection._id, {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(messageData),
-    // })
-    //   .then((res) => res.json())
-    //   .then((res) =>
-    //     setConversation((prev) => {
-    //       conversation.messages = [...prev.messages, res.newMessage];
-    //     })
-    //   );
   };
 
-  // const deleteMessage = (m, index) => {
-  //   fetch(process.env.REACT_APP_PORT_SERVER + "/messages", {
-  //     method: "DELETE",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(m),
-  //   });
-
-  // chatLog.current.children[index].classList.add("hidden");
-  // };
+  const handleLiveText = (e) => {
+    socket.emit("live text", e.target.value);
+  };
 
   return (
     <div className="Chat" style={{ height: chatHeight }}>
       <div ref={chatBottom}></div>
-
       {conversation && (
         <ul className="chat-log">
           <div className="chat-bottom"></div>
+          {theirLiveText && (
+            <li>
+              <div className="their-live-text">{theirLiveText}</div>
+            </li>
+          )}
           {conversation.map((m, index) => (
             <li
               key={index}
@@ -144,15 +124,14 @@ export default function Chat(props) {
       )}
       <form onSubmit={handleMessage} className="message-form" ref={messageRef}>
         <input
+          onChange={(e) => {
+            handleLiveText(e);
+          }}
           className="message-input"
           name="message"
           autoComplete="off"
         ></input>
       </form>
-
-      {/* <button type="submit" className="material-icons">
-          flash_on
-        </button> */}
     </div>
   );
 }

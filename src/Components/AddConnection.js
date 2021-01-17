@@ -6,9 +6,11 @@ export default function AddConnection(props) {
   const addContactForm = useRef();
   const [showAddInput, setShowAddInput] = useState(false);
   const [showAddTitle, setShowAddTitle] = useState(false);
+  const [showCloseButton, setShowCloseButton] = useState(false);
 
   useEffect(() => {
     setShowAddInput(false);
+    setShowCloseButton(false);
   }, [currConversation]);
 
   const handleAdd = async (e) => {
@@ -56,38 +58,45 @@ export default function AddConnection(props) {
 
   const toggleAdd = () => {
     setShowAddInput((prev) => !prev);
+    setShowAddTitle(false);
+    setShowCloseButton((prev) => !prev);
   };
 
   return (
     <form className="add-contact" ref={addContactForm} onSubmit={handleAdd}>
-      {/* <button type="submit">
-          <span className="material-icons">add_circle</span>
-        </button> */}
-      <div
+      <button
         onMouseEnter={() => setShowAddTitle(true)}
         onMouseLeave={() => setShowAddTitle(false)}
-
-        // className="logout-button"
+        onClick={handleAdd}
+        type="submit"
       >
-        <button onClick={handleAdd} type="submit">
-          <span className=" material-icons">add_circle</span>
-        </button>
-        <input
-          id="add-contact-field"
-          className={showAddInput ? "show-add" : "hide-add"}
-          name="username"
-          type="text"
-          placeholder="Username"
-        ></input>
-        <span
-          onClick={handleAdd}
-          className={`add-title ${
-            showAddTitle ? "show-logout" : "hide-logout"
-          } ${showAddInput ? "add-title-off" : "add-title-on"}`}
-        >
-          Add contact
+        <span className="material-icons">
+          {showCloseButton ? "close" : "add_circle"}
         </span>
+      </button>
+      <input
+        className={
+          showAddInput ? "add-contact-input" : "add-contact-input hide-input"
+        }
+        name="username"
+        type="text"
+        placeholder="Contact username"
+      ></input>
+      <div
+        className={`add-contact-text ${
+          showAddTitle ? "show-add-contact-text" : "hide-add-contact-text"
+        }`}
+      >
+        Add contact
       </div>
+      <div
+        className={
+          showAddInput
+            ? "dark-background"
+            : "dark-background hide-dark-background"
+        }
+        onClick={showAddInput && toggleAdd}
+      ></div>
     </form>
   );
 }
