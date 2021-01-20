@@ -31,8 +31,6 @@ export default function LogIn() {
 
     setUsernameInput(username);
 
-    // console.log(usernameInput);
-
     fetch(`${process.env.REACT_APP_PORT_SERVER}/login/username`, {
       method: "POST",
       headers: {

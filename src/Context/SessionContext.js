@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 const SessionContext = React.createContext();
 
@@ -68,6 +68,29 @@ export function SessionProvider({ children }) {
     });
     setContactsList(updatedList);
   };
+
+  useEffect(() => {
+    fetch(process.env.REACT_APP_PORT_SERVER, {
+      headers: {
+        Authorization: "Bearer " + this.props.token,
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.authenticated === false) {
+          console.log("Start session to enter chat.");
+          history.push("/");
+        } else {
+          setUser(res.user);
+          createContactsList(res.user.connections);
+          console.log(
+            `User ${res.user.username} has been correctly authenticated.`
+          );
+          history.push("/chat");
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   // useEffect(() => {
   //   if (!user) {
