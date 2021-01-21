@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useSession } from "../Context/SessionContext";
+import { useChat } from "../Context/ChatContext";
 import AddConnection from "./AddConnection";
 import Contacts from "./Contacts";
 import Menu from "./Menu";
 
 export default function NavBar() {
-  const { user } = useSession();
+  const { user } = useChat();
 
   return (
     <div className="app-nav">

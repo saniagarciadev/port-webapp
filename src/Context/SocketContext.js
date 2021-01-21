@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 import React, { useContext, useState, useEffect } from "react";
-import { useSession } from "./SessionContext";
+import { useChat } from "./ChatContext";
 
 const SocketContext = React.createContext();
 
@@ -19,7 +19,7 @@ export function SocketProvider({ children }) {
     updateLiveStatus,
     theirLiveText,
     setTheirLiveText,
-  } = useSession();
+  } = useChat();
   // const [theirLiveCursor, setTheirLiveCursor] = useState(0);
 
   const startSocketConnection = (userObj) => {

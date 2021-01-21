@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useSession } from "../Context/SessionContext";
+import { useChat } from "../Context/ChatContext";
 import { useSocket } from "../Context/SocketContext";
 
 export default function Contacts(props) {
@@ -11,7 +11,7 @@ export default function Contacts(props) {
     contactsList,
     currConversation,
     setCurrConversation,
-  } = useSession();
+  } = useChat();
   const { socket } = useSocket();
   const [selectedContact, setSelectedContact] = useState("");
 

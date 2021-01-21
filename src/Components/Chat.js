@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "../App.css";
-import { useSession } from "../Context/SessionContext";
+import { useChat } from "../Context/ChatContext";
 import { useSocket } from "../Context/SocketContext";
 
 export default function Chat(props) {
@@ -14,7 +14,7 @@ export default function Chat(props) {
     setConversation,
     currConversation,
     theirLiveText,
-  } = useSession();
+  } = useChat();
   const chatBottom = useRef();
   const messageRef = useRef();
   // const [chatHeight, setChatHeight] = useState("");

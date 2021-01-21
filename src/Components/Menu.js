@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useSession } from "../Context/SessionContext";
+import { useChat } from "../Context/ChatContext";
 import { useHistory } from "react-router-dom";
 import { useSocket } from "../Context/SocketContext";
 
 export default function Menu(props) {
   let history = useHistory();
-  const { user, setUser } = useSession();
+  const { user, setUser } = useChat();
   const { socket } = useSocket();
   const [showMenuLabel, setShowMenuLabel] = useState(false);
   const [showMenuWindow, setShowMenuWindow] = useState(false);

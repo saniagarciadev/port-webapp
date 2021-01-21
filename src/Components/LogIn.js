@@ -1,11 +1,11 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { useSession } from "../Context/SessionContext";
+import { useChat } from "../Context/ChatContext";
 import { useSocket } from "../Context/SocketContext";
 
 export default function LogIn() {
   let history = useHistory();
-  const { user, setUser, createContactsList } = useSession();
+  const { user, setUser, createContactsList } = useChat();
   const { startSocketConnection } = useSocket();
   const usernameRef = useRef();
   const emailRef = useRef();

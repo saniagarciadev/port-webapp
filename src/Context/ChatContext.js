@@ -1,13 +1,13 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-const SessionContext = React.createContext();
+const ChatContext = React.createContext();
 
-export function useSession() {
-  return useContext(SessionContext);
+export function useChat() {
+  return useContext(ChatContext);
 }
 
-export function SessionProvider({ children }) {
+export function ChatProvider({ children }) {
   const [user, setUser] = useState(null);
   const [conversation, setConversation] = useState(null);
   const [contactsList, setContactsList] = useState(null);
@@ -69,28 +69,28 @@ export function SessionProvider({ children }) {
     setContactsList(updatedList);
   };
 
-  useEffect(() => {
-    fetch(process.env.REACT_APP_PORT_SERVER, {
-      headers: {
-        Authorization: "Bearer " + this.props.token,
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.authenticated === false) {
-          console.log("Start session to enter chat.");
-          history.push("/");
-        } else {
-          setUser(res.user);
-          createContactsList(res.user.connections);
-          console.log(
-            `User ${res.user.username} has been correctly authenticated.`
-          );
-          history.push("/chat");
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   fetch(process.env.REACT_APP_PORT_SERVER, {
+  //     headers: {
+  //       Authorization: "Bearer " + this.props.token,
+  //     },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((res) => {
+  //       if (res.authenticated === false) {
+  //         console.log("Start session to enter chat.");
+  //         history.push("/");
+  //       } else {
+  //         setUser(res.user);
+  //         createContactsList(res.user.connections);
+  //         console.log(
+  //           `User ${res.user.username} has been correctly authenticated.`
+  //         );
+  //         history.push("/chat");
+  //       }
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   // useEffect(() => {
   //   if (!user) {
@@ -119,27 +119,6 @@ export function SessionProvider({ children }) {
   //   }
   // }, []);
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     fetch("process.env.REACT_APP_PORT_SERVER/", {
-  //       method: "GET",
-  //       credentials: "include",
-  //       headers: { "Content-Type": "application/json" },
-  //       "Access-Control-Allow-Origin": "process.env.REACT_APP_PORT_SERVER/",
-  //     })
-  //       .then((res) => res.json())
-  //       .then((res) => {
-  //         if (res.success === true) {
-  //           // console.log(res.user);
-  //           setUser(res.user);
-  //           createContactsList(res.user.connections);
-  //           return history.push("/chat");
-  //         }
-  //       })
-  //       .catch((err) => console.log(err));
-  //   }
-  // }, []);
-
   const values = {
     user,
     setUser,
@@ -155,7 +134,5 @@ export function SessionProvider({ children }) {
     setTheirLiveText,
   };
 
-  return (
-    <SessionContext.Provider value={values}>{children}</SessionContext.Provider>
-  );
+  return <ChatContext.Provider value={values}>{children}</ChatContext.Provider>;
 }
