@@ -10,8 +10,8 @@ export default function Chat(props) {
     user,
     setUser,
     createContactsList,
-    conversation,
-    setConversation,
+    chatLog,
+    setChatLog,
     currConversation,
     theirLiveText,
   } = useChat();
@@ -63,7 +63,7 @@ export default function Chat(props) {
 
   useEffect(() => {
     scrollToBottom();
-  }, [conversation, setConversation]);
+  }, [chatLog, setChatLog]);
 
   const handleMessage = (e) => {
     e.preventDefault();
@@ -101,7 +101,7 @@ export default function Chat(props) {
   return (
     <div className="Chat">
       <div ref={chatBottom}></div>
-      {conversation && (
+      {chatLog && (
         <ul className="chat-log">
           <div className="chat-bottom"></div>
           {currConversation.isLive && theirLiveText && (
@@ -109,7 +109,7 @@ export default function Chat(props) {
               <div className="their-live-text">{theirLiveText}</div>
             </li>
           )}
-          {conversation.map((m, index) => (
+          {chatLog.map((m, index) => (
             <li
               key={index}
               className={

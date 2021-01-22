@@ -13,7 +13,7 @@ export function SocketProvider({ children }) {
   const {
     user,
     contactsList,
-    setConversation,
+    setChatLog,
     currConversation,
     updateOnlineStatus,
     updateLiveStatus,
@@ -86,7 +86,7 @@ export function SocketProvider({ children }) {
         if (theirLiveText) {
           setTheirLiveText("");
         }
-        setConversation((prevConversation) => [msg, ...prevConversation]);
+        setChatLog((prevConversation) => [msg, ...prevConversation]);
       });
       socket.on("live text", async (liveText) => {
         setTheirLiveText(liveText);

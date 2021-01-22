@@ -6,8 +6,8 @@ export default function Contacts(props) {
   const {
     user,
     // setUser,
-    // conversation,
-    setConversation,
+    // chatLog,
+    setChatLog,
     contactsList,
     currConversation,
     setCurrConversation,
@@ -35,7 +35,7 @@ export default function Contacts(props) {
       return { ...contact, roomId: userData.roomId };
     });
     socket.once("chat history", (messages) => {
-      setConversation(messages);
+      setChatLog(messages);
     });
     setSelectedContact(contact._id);
     // }

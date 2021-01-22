@@ -1,20 +1,18 @@
 import React from "react";
-import { Route } from "react-router-dom";
+// import { Route } from "react-router-dom";
 import "./App.css";
+import { useAuth } from "./Context/AuthContext";
 import NavBar from "./Components/NavBar";
 import Chat from "./Components/Chat";
-import LogIn from "./Components/LogIn";
+import LogInScreen from "./Components/LogInScreen";
 
 function App() {
+  const { user } = useAuth();
+
   return (
     <div className="App">
       <NavBar />
-      <Route exact path="/">
-        <LogIn />
-      </Route>
-      <Route exact path="/chat">
-        <Chat />
-      </Route>
+      {user ? <Chat /> : <LogInScreen />}
     </div>
   );
 }

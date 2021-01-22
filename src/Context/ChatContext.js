@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 const ChatContext = React.createContext();
 
@@ -8,8 +8,7 @@ export function useChat() {
 }
 
 export function ChatProvider({ children }) {
-  const [user, setUser] = useState(null);
-  const [conversation, setConversation] = useState(null);
+  const [chatLog, setChatLog] = useState(null);
   const [contactsList, setContactsList] = useState(null);
   const [currConversation, setCurrConversation] = useState("");
   const [theirLiveText, setTheirLiveText] = useState("");
@@ -120,10 +119,8 @@ export function ChatProvider({ children }) {
   // }, []);
 
   const values = {
-    user,
-    setUser,
-    conversation,
-    setConversation,
+    chatLog,
+    setChatLog,
     contactsList,
     createContactsList,
     updateOnlineStatus,

@@ -3,16 +3,16 @@ import { useChat } from "../Context/ChatContext";
 import { useHistory } from "react-router-dom";
 import { useSocket } from "../Context/SocketContext";
 
-export default function Menu(props) {
+export default function OptionsMenu(props) {
   let history = useHistory();
   const { user, setUser } = useChat();
   const { socket } = useSocket();
-  const [showMenuLabel, setShowMenuLabel] = useState(false);
-  const [showMenuWindow, setShowMenuWindow] = useState(false);
+  const [showOptionsMenuLabel, setShowOptionsMenuLabel] = useState(false);
+  const [showOptionsMenuWindow, setShowOptionsMenuWindow] = useState(false);
 
-  const toggleShowMenu = () => {
-    setShowMenuWindow((prev) => !prev);
-    setShowMenuLabel(false);
+  const toggleShowOptionsMenu = () => {
+    setShowOptionsMenuWindow((prev) => !prev);
+    setShowOptionsMenuLabel(false);
   };
 
   const handleLogout = async () => {
@@ -45,29 +45,29 @@ export default function Menu(props) {
       <div className="menu-button">
         <span
           className={`menu-label ${
-            showMenuLabel ? "show-menu-label" : "hide-menu-label"
+            showOptionsMenuLabel ? "show-menu-label" : "hide-menu-label"
           }`}
         >
-          Menu
+          OptionsMenu
         </span>
         <span
-          onMouseEnter={() => setShowMenuLabel(true)}
-          onMouseLeave={() => setShowMenuLabel(false)}
-          onClick={toggleShowMenu}
+          onMouseEnter={() => setShowOptionsMenuLabel(true)}
+          onMouseLeave={() => setShowOptionsMenuLabel(false)}
+          onClick={toggleShowOptionsMenu}
           className="material-icons menu-icon"
         >
-          {showMenuWindow ? "close" : "menu"}
+          {showOptionsMenuWindow ? "close" : "menu"}
         </span>
       </div>
       <div
         className={
-          showMenuWindow
+          showOptionsMenuWindow
             ? "menu-window show-menu-window"
             : "menu-window hide-menu-window"
         }
       >
         <div className="menu-login-info">Logged in as {user.username}</div>
-        <p href="#">Options</p>
+        <p href="#">OptionsMenu</p>
         <p href="#">About</p>
         <p onClick={handleLogout} href="#">
           Log out
@@ -75,11 +75,11 @@ export default function Menu(props) {
       </div>
       <div
         className={
-          showMenuWindow
+          showOptionsMenuWindow
             ? "dark-background"
             : "dark-background hide-dark-background"
         }
-        onClick={showMenuWindow && toggleShowMenu}
+        onClick={showOptionsMenuWindow && toggleShowOptionsMenu}
       ></div>
     </div>
   );
