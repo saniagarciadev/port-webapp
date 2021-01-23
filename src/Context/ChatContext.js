@@ -3,11 +3,11 @@ import React, { useContext, useState, useEffect } from "react";
 
 const ChatContext = React.createContext();
 
-export function useChat() {
-  return useContext(ChatContext);
-}
+// export function useChat() {
+//   return useContext(ChatContext);
+// }
 
-export function ChatProvider({ children }) {
+function ChatProvider({ children }) {
   const [chatLog, setChatLog] = useState(null);
   const [contactsList, setContactsList] = useState(null);
   const [currConversation, setCurrConversation] = useState("");
@@ -133,3 +133,6 @@ export function ChatProvider({ children }) {
 
   return <ChatContext.Provider value={values}>{children}</ChatContext.Provider>;
 }
+
+const useChat = () => React.useContext(ChatContext);
+export { ChatProvider, useChat };

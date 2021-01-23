@@ -35,7 +35,11 @@ body {
   /* border: 2px solid #555555; */
 }
 
-.login-area input {
+.login-screen {
+  height: 100vh;
+}
+
+.login-screen input {
   /* text-align: right; */
   margin: auto;
   padding: 5px 40px;
@@ -52,7 +56,7 @@ body {
   width: 400px;
   max-width: 40vw;
 }
-.login-area input:focus {
+.login-screen input:focus {
   outline: none;
 }
 
@@ -388,11 +392,12 @@ body {
   position: fixed;
   top: 21px;
   right: 15px;
-  max-width: 70vw;
-  max-height: 60vh;
+  max-width: 50vw;
+  height: fit-content;
   /* overflow: auto; */
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 35px 40px;
   border: 2px solid rgb(37, 37, 37);
   border-radius: 5px;
@@ -429,12 +434,61 @@ body {
   transition: 0.4s;
 }
 
-.menu-window p {
+.option-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: fit-content;
+  width: 80%;
+  margin: 15px;
+  padding: 15px 40px;
+  border: 2px solid rgb(37, 37, 37);
+  background-color: rgb(37, 37, 37);
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.option-div p {
+  display: flex;
+  align-items: flex-start;
   color: white;
   text-decoration: none;
-  padding: 5px 40px;
+  /* padding: 5px 40px; */
+  margin: 1ch;
   opacity: 0.8;
   transition: 0.4s;
+}
+
+.option-input {
+  /* margin: 15px auto; */
+  transition: 0.3s;
+  overflow: hidden;
+}
+
+.option-button {
+  border: none;
+  padding: 0;
+  overflow: hidden;
+}
+
+.option-div input {
+  color: white;
+  padding: 5px;
+  border: 2px solid rgb(37, 37, 37);
+  border-radius: 5px;
+  background-color: black;
+}
+
+.option-div input:focus {
+  outline: none;
+  /* box-shadow: 0 0 0 1pt grey; */
+}
+
+.about-text {
+  max-width: 70%;
+  transition: 0.4s;
+  overflow: hidden;
 }
 
 .hide-menu-window p {

@@ -1,5 +1,6 @@
 import { io } from "socket.io-client";
 import React, { useContext, useState, useEffect } from "react";
+import { useAuth } from "./AuthContext";
 import { useChat } from "./ChatContext";
 
 const SocketContext = React.createContext();
@@ -10,8 +11,8 @@ export function useSocket() {
 
 export function SocketProvider({ children }) {
   const [socket, setSocket] = useState(null);
+  const { user } = useAuth();
   const {
-    user,
     contactsList,
     setChatLog,
     currConversation,

@@ -1,20 +1,20 @@
 import React, { useState, useRef, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 import "../App.css";
+import { useAuth } from "../Context/AuthContext";
 import { useChat } from "../Context/ChatContext";
 import { useSocket } from "../Context/SocketContext";
 
 export default function Chat(props) {
-  const history = useHistory();
+  // const history = useHistory();
   const {
-    user,
-    setUser,
     createContactsList,
     chatLog,
     setChatLog,
     currConversation,
     theirLiveText,
   } = useChat();
+  const { user } = useAuth();
   const chatBottom = useRef();
   const messageRef = useRef();
   // const [chatHeight, setChatHeight] = useState("");
@@ -26,36 +26,9 @@ export default function Chat(props) {
     }
   };
 
-  const asyncStart = async (userObj) => {
-    await setUser(userObj);
-    await createContactsList(userObj.connections);
-    startSocketConnection(userObj);
-  };
-
   useEffect(() => {
-    if (!user) {
-      fetch(process.env.REACT_APP_PORT_SERVER, {
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // "Access-Control-Allow-Origin": "http://port.contact/",
-      })
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.authenticated === false) {
-            console.log("Start session to enter chat.");
-            history.push("/");
-          } else {
-            asyncStart(res.user);
-
-            console.log(
-              `User ${res.user.username} has been correctly authenticated.`
-            );
-          }
-        })
-        .catch((err) => console.log(err));
-    }
+    createContactsList(user.connections);
+    startSocketConnection(user);
 
     // let windowHeight = window.innerHeight;
     // setChatHeight(`${windowHeight}px`);

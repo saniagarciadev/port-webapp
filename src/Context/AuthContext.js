@@ -9,17 +9,25 @@ function AuthProvider(props) {
     // if (document.cookie) {
     fetch(process.env.REACT_APP_PORT_SERVER + "/auth", {
       method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
       credentials: "include",
     })
+      //   .then((res) => res.json())
+      //   .then((data) => console.log(data))
       .then((res) => {
-        if (res.statusCode === 204) {
-          return;
-        } else {
-          res.json();
+        if (res.status === 204) {
+          return false;
+        } else if (res.status === 200) {
+          return res.json();
         }
       })
       .then((res) => {
-        setUser(res.user);
+        if (res) {
+          console.log(res);
+          setUser(res);
+        }
       })
       .catch((err) => console.log(err));
     // }
@@ -35,11 +43,19 @@ function AuthProvider(props) {
       // "Access-Control-Allow-Origin": "http://port.contact/",
       credentials: "include",
     })
-      .then((res) => res.json())
       .then((res) => {
         if (res.status === 200) {
-          setUser(res.user);
+          return res.json();
         } else {
+          console.log(res);
+          return false;
+        }
+      })
+      .then((res) => {
+        if (res) {
+          return setUser(res);
+        } else {
+          return;
         }
       })
       .catch((err) => console.log(err));

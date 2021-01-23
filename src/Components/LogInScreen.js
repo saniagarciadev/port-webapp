@@ -15,9 +15,9 @@ export default function LogInScreen() {
   const [showUsernameInput, setShowUsernameInput] = useState(true);
   // const [showEmailInput, setShowEmailInput] = useState(false);
   const [showPasswordInput, setShowPasswordInput] = useState(false);
-  const [userExists, setUserExists] = useState(false);
+  // const [userExists, setUserExists] = useState(false);
   const [usernameInput, setUsernameInput] = useState("");
-  const [passwordLabel, setPasswordLabel] = useState("");
+  // const [passwordLabel, setPasswordLabel] = useState("");
 
   // const asyncStart = async (userObj) => {
   //   await setUser(userObj);
@@ -34,55 +34,48 @@ export default function LogInScreen() {
 
     fetch(`${process.env.REACT_APP_PORT_SERVER}/login/${username}`, {
       method: "GET",
-      // headers: {
-      //   "Content-Type": "application/json",
-      // },
-      // credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
     })
       .then((res) => {
         if (res.status === 200) {
           setShowUsernameInput(false);
           setShowPasswordInput(true);
           console.log("User exists.");
-          // return;
+          return false; //~~ No temporary user created.
         } else if (res.status === 201) {
-          return res.json();
+          return res.json(); //~~ Return temporary user object.
         }
       })
       .then((res) => {
-        // setUser(res);
-        console.log(res);
+        if (res) {
+          setUser(res);
+          console.log(res);
+        }
       })
       .catch((err) => console.log(err));
   };
 
-  const handlePassword = () => {
+  const handlePassword = (e) => {
+    e.preventDefault();
     const data = {
       username: usernameInput,
       password: passwordRef.current["password"].value,
     };
-    if (userExists) {
-      login(data);
-    } else {
-      signUp(data);
-    }
-    setShowPasswordInput(false);
+    login(data);
+    // setShowPasswordInput(false);
   };
 
   const goBack = () => {
     setShowPasswordInput(false);
     setShowUsernameInput(true);
-    // if (showPasswordInput) {
-    //   setShowPasswordInput(false);
-    //   setShowUsernameInput(true);
-    // } else {
-    //   setShowEmailInput(false);
-    //   setShowPasswordInput(true);
-    // }
   };
 
   return (
-    <div className="login-area">
+    <div className="login-screen">
+      <h1 className="app-title">port</h1>
       <form
         ref={usernameRef}
         className={`login-input ${
@@ -109,7 +102,6 @@ export default function LogInScreen() {
           placeholder="Password"
           required
         ></input>
-        <p>password</p>
       </form>
 
       {/* <form

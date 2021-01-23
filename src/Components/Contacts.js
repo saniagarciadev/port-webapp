@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useAuth } from "../Context/AuthContext";
 import { useChat } from "../Context/ChatContext";
 import { useSocket } from "../Context/SocketContext";
 
 export default function Contacts(props) {
   const {
-    user,
     // setUser,
     // chatLog,
     setChatLog,
@@ -12,6 +12,7 @@ export default function Contacts(props) {
     currConversation,
     setCurrConversation,
   } = useChat();
+  const { user } = useAuth();
   const { socket } = useSocket();
   const [selectedContact, setSelectedContact] = useState("");
 
