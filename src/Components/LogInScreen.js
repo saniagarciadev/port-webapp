@@ -6,7 +6,7 @@ import { useAuth } from "../Context/AuthContext";
 
 export default function LogInScreen() {
   // let history = useHistory();
-  const { login, signUp, setUser } = useAuth();
+  const { login, register, setUser, userIsTemp, setUserIsTemp } = useAuth();
   // const { createContactsList } = useChat();
   // const { startSocketConnection } = useSocket();
   const usernameRef = useRef();
@@ -46,6 +46,7 @@ export default function LogInScreen() {
           console.log("User exists.");
           return false; //~~ No temporary user created.
         } else if (res.status === 201) {
+          setUserIsTemp(true);
           return res.json(); //~~ Return temporary user object.
         }
       })

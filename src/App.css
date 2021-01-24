@@ -8,6 +8,7 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow: hidden;
   margin: 0;
+  padding: 0;
 }
 
 @font-face {
@@ -331,7 +332,7 @@ body {
   }
 }
 
-.menu-button {
+.options-button {
   margin-left: auto;
   padding: 0 23px;
   display: flex;
@@ -339,7 +340,7 @@ body {
   align-items: center;
 }
 
-.menu-icon {
+.options-icon {
   position: relative;
   width: fit-content;
   height: fit-content;
@@ -354,20 +355,20 @@ body {
   transition: 0.4s;
 }
 
-.menu-label {
+.options-label {
   display: none;
 }
 
 @media (hover: hover) {
-  .menu-icon {
+  .options-icon {
     opacity: 0.4;
   }
 
-  .menu-icon:hover {
+  .options-icon:hover {
     opacity: 0.6;
   }
 
-  .menu-label {
+  .options-label {
     display: block;
     cursor: default;
     width: fit-content;
@@ -379,16 +380,16 @@ body {
     transition: 0.4s;
   }
 
-  .show-menu-label {
+  .show-options-label {
     opacity: 1;
   }
 
-  .hide-menu-label {
+  .hide-options-label {
     opacity: 0;
   }
 }
 
-.menu-window {
+.options-window {
   position: fixed;
   top: 21px;
   right: 15px;
@@ -398,7 +399,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 35px 40px;
+  padding: 70px 30px 50px 30px;
   border: 2px solid rgb(37, 37, 37);
   border-radius: 5px;
   background-color: black;
@@ -406,11 +407,17 @@ body {
   z-index: 4;
 }
 
-/* .show-menu-window {
+@media (max-width: 700px) {
+  .options-window {
+    max-width: 65vw;
+  }
+}
+
+/* .show-options-window {
   display: block;
 } */
 
-.hide-menu-window {
+.hide-options-window {
   padding: 0px;
 
   max-width: 50px;
@@ -420,16 +427,17 @@ body {
   opacity: 0;
 }
 
-.menu-login-info {
+.options-login-info {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 10px;
   height: 34px;
   width: fit-content;
   display: flex;
   align-items: center;
-  margin: auto;
-  padding: 0 10px;
+  margin: 10px;
+  /* padding: 0 10px; */
+  font-size: 1.2rem;
   color: grey;
   transition: 0.4s;
 }
@@ -449,30 +457,51 @@ body {
   transition: 0.3s;
 }
 
-.option-div p {
+.option-label {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 1.2rem;
   color: white;
-  text-decoration: none;
   /* padding: 5px 40px; */
   margin: 1ch;
   opacity: 0.8;
   transition: 0.4s;
+  cursor: pointer;
+}
+
+.success-check {
+  display: inline-block;
+}
+
+.logout-label:hover {
+  text-decoration: underline;
+}
+
+.delete-user {
+  color: rgb(226, 142, 142);
+  font-weight: bold;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.delete-user:hover {
+  text-decoration: underline;
+}
+
+.option-info {
+  color: grey;
+  margin-bottom: 1ch;
+}
+
+.option-form {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: 0.3s;
 }
 
 .option-input {
-  /* margin: 15px auto; */
-  transition: 0.3s;
-  overflow: hidden;
-}
-
-.option-button {
-  border: none;
-  padding: 0;
-  overflow: hidden;
-}
-
-.option-div input {
   color: white;
   padding: 5px;
   border: 2px solid rgb(37, 37, 37);
@@ -480,7 +509,7 @@ body {
   background-color: black;
 }
 
-.option-div input:focus {
+.option-input:focus {
   outline: none;
   /* box-shadow: 0 0 0 1pt grey; */
 }
@@ -491,19 +520,19 @@ body {
   overflow: hidden;
 }
 
-.hide-menu-window p {
+.hide-options-window p {
   font-size: 0px;
   padding: 0px;
   opacity: 0;
 }
 
-.hide-menu-window div {
+.hide-options-window div {
   font-size: 0px;
   padding: 0px;
   opacity: 0;
 }
 
-.menu-window p:hover {
+.options-window p:hover {
   color: white;
   cursor: pointer;
   opacity: 1;
@@ -567,10 +596,9 @@ body {
 }
 
 .chat-log {
-  width: 100%;
+  /* width: 100%; */
   max-width: 900px;
   display: flex;
-  flex: 1;
   flex-direction: column-reverse;
   justify-content: flex-start;
   overflow-wrap: break-word;
@@ -619,6 +647,18 @@ body {
   padding: 5px 40px;
   border: 2px solid rgb(37, 37, 37);
   border-radius: 5px;
+}
+
+@media (max-width: 699px) {
+  .chat-log {
+    width: 95vw;
+  }
+  .my-message {
+    max-width: 100%;
+  }
+  .their-message {
+    max-width: 100%;
+  }
 }
 
 /* .their-live-text-container {
@@ -684,14 +724,14 @@ body {
   color: rgb(255, 189, 158);
 }
 
-/* @media (max-width: 700px) {
-  .message-form {
+@media (max-width: 700px) {
+  /* .message-form {
     width: 100%;
-  }
+  } */
   .message-input {
-    width: 50%;
+    width: 50vw;
   }
-} */
+}
 
 .message-input:focus {
   outline: none;
