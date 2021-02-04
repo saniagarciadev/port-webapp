@@ -1,11 +1,14 @@
 <h1>Port - The Minimal Communication System</h1>
-<h3>Features</h3>
+<p>
+With this project I'm creating the chat application I'd love to use. It should have a sleek design with fluid animations, some unique, fun communication features, easy multi-device funtionality without account or phone number requirements, no locking of my data to a closed ecosysem, and no funding of a company I dislike.
+</p>
+<h3>Features (so far)</h3>
 <ul>
         <li>Private, encrypted conversations.</li>
         <li>Live writing with chat partner on display.</li>
         <li>Only username needed to start.</li>
         <li>Only contact's username needed to connect with them.</li>
-        <li>Optional account allows you to pick up where you left off.</li>
+        <li>Optional account allows you to save your history and pick up where you left off.</li>
         <li>Live synching accross devices.</li>
         <li>Dark mode all the things forever.</li>
         <li>More coming soon. Stay tuned!</li>
