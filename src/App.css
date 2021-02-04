@@ -638,7 +638,7 @@ body {
 }
 
 .their-message {
-  /* text-align: left; */
+  text-align: left;
   color: white;
   width: fit-content;
   max-width: 50%;
@@ -652,12 +652,15 @@ body {
 @media (max-width: 699px) {
   .chat-log {
     width: 95vw;
+    font-size: 1.2em;
   }
   .my-message {
-    max-width: 100%;
+    max-width: 70%;
+    padding: 10px 20px;
   }
   .their-message {
-    max-width: 100%;
+    max-width: 70%;
+    padding: 10px 20px;
   }
 }
 

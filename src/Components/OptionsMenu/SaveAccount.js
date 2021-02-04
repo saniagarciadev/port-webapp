@@ -7,11 +7,12 @@ export default function SaveAccount({ values }) {
   const registerRef = useRef();
 
   const handleRegister = () => {
-    const data = {
-      email: registerRef.current["email"].value,
-      password: registerRef.current["password"].value,
-    };
-    register(data);
+    // const data = {
+    //   email: registerRef.current["email"].value,
+    //   password: registerRef.current["password"].value,
+    // };
+    // register(data);
+    console.log("hello");
   };
 
   return (
@@ -31,7 +32,7 @@ export default function SaveAccount({ values }) {
         ref={registerRef}
         style={show.register ? { height: "15ch" } : { height: "0ch" }}
         className="option-form"
-        onSubmit={handleRegister}
+        onSubmit={() => handleRegister()}
       >
         <div className="option-info">
           Pick up where you left off and instantaneously sync your conversations

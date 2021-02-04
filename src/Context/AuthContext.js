@@ -61,28 +61,29 @@ function AuthProvider({ children }) {
   };
 
   const register = (data) => {
-    fetch(`${process.env.REACT_APP_PORT_SERVER}/register`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-      body: JSON.stringify(data),
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          return res.json();
-        } else {
-          console.log("Error saving account.");
-          return false;
-        }
-      })
-      .then((res) => {
-        res && setUser(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    console.log(data);
+    // fetch(`${process.env.REACT_APP_PORT_SERVER}/register`, {
+    //   method: "PUT",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   credentials: "include",
+    //   body: JSON.stringify(data),
+    // })
+    //   .then((res) => {
+    //     if (res.status === 200) {
+    //       return res.json();
+    //     } else {
+    //       console.log("Error saving account.");
+    //       return false;
+    //     }
+    //   })
+    //   .then((res) => {
+    //     res && setUser(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
   };
 
   return (
