@@ -1,6 +1,6 @@
 <h1>Port - The Minimal Communication System</h1>
 <p>
-With this project I'm creating the chat application I'd love to use. It should have a sleek design with fluid animations, some unique, fun communication features, easy multi-device funtionality without account or phone number requirements, no locking of my data to a closed ecosysem, and no funding of a company I dislike.
+With this project I'm creating the chat application I'd love to use. A device-agnostic app with a sleek design, fluid animations, some unique, fun communication features, immediate entry without account or phone number requirements, no locking of my data to a closed ecosysem, and no funding of a company I dislike. It's a big task but I love learning about networking technologies :]
 </p>
 <h3>Features (so far)</h3>
 <ul>
