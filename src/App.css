@@ -38,6 +38,10 @@ body {
 
 .login-screen {
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .login-screen input {
@@ -75,11 +79,6 @@ body {
   padding: 20px;
 }
 
-.login-input {
-  position: relative;
-  margin-top: 60vh;
-}
-
 .show-login-input {
   display: block;
 }
@@ -113,11 +112,11 @@ body {
 .app-title {
   /* position: fixed;
   top: 50px; */
-  margin: 50px auto;
+  margin: -50px 0 100px 0;
   display: inline-block;
   letter-spacing: 2px;
   font-weight: normal;
-  text-align: center;
+  /* text-align: center; */
   color: grey;
   /* font-family: "arista_pro_triallight"; */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",

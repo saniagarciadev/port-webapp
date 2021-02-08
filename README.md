@@ -1,6 +1,6 @@
-<h1>Port - The Minimal Communication System</h1>
+<h1>Port - Version Alpha 0.05</h1>
 <p>
-With this project I'm creating the chat application I'd love to use. It should have a sleek design with fluid animations, some unique, fun communication features, easy multi-device funtionality without account or phone number requirements, no locking of my data to a closed ecosysem, and no funding of a company I dislike.
+With this project I'm creating the chat application I'd love to use. It should have a sleek design with fluid animations, some unique, fun communication features, easy multi-device funtionality without account or phone number requirements and no locking of my data to a closed ecosysem.
 </p>
 <h3>Features (so far)</h3>
 <ul>
