@@ -1,8 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 
 export default function ChangeUsername({ values }) {
-  const { show, setShow, user, setUser } = values;
+  const { show, setShow, handleOpenClose, user, setUser } = values;
   const usernameRef = useRef();
+  const [usernameSuccess, setUsernameSuccess] = useState();
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -16,7 +17,6 @@ export default function ChangeUsername({ values }) {
       credentials: "include",
       body: JSON.stringify({ newUsername: newUsername }),
     })
-      // .then((res) => res.json())
       .then((res) => {
         if (res.status === 200) {
           setUser((prev) => {
@@ -41,41 +41,33 @@ export default function ChangeUsername({ values }) {
 
   return (
     <div className="option-div">
-      <div
-        className="option-label"
-        onClick={() =>
-          setShow((prev) => {
-            return { ...prev, username: !prev.username };
-          })
-        }
-      >
-        Change username{" "}
+      <div className="option-label" onClick={() => handleOpenClose("username")}>
+        Change username
         <span className="material-icons option-arrow">keyboard_arrow_down</span>
       </div>
-      <form
-        ref={usernameRef}
-        style={show.username ? { height: "4.5ch" } : { height: "0ch" }}
-        className="option-form"
-        onSubmit={handleChange}
+      <div
+        className={show === "username" ? "option-content" : "hidden-content"}
       >
-        <input
-          className="option-input"
-          type="text"
-          name="username"
-          defaultValue={user.username}
-          required
-        ></input>
-        <span
-          style={
-            show.usernameSuccess
-              ? { display: "inline-block" }
-              : { display: "none" }
-          }
-          className="material-icons success-check"
-        >
-          done
-        </span>
-      </form>
+        <form ref={usernameRef} className="option-form" onSubmit={handleChange}>
+          <input
+            className="option-input"
+            type="text"
+            name="username"
+            defaultValue={user.username}
+            required
+          ></input>
+          <span
+            style={
+              usernameSuccess
+                ? { display: "inline-block" }
+                : { display: "none" }
+            }
+            className="material-icons success-check"
+          >
+            done
+          </span>
+        </form>
+      </div>
     </div>
   );
 }

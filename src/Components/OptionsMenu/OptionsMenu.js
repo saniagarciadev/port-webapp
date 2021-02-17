@@ -7,19 +7,19 @@ import DeleteUser from "./DeleteUser";
 
 export default function OptionsMenu(props) {
   const { user, setUser, userIsTemp, setUserIsTemp } = useAuth();
-  const [show, setShow] = useState({
-    username: false,
-    usernameSuccess: false,
-    register: false,
-    delete: false,
-    about: false,
-  });
+  const [show, setShow] = useState(null);
   const [showOptionsMenuLabel, setShowOptionsMenuLabel] = useState(false);
   const [showOptionsMenuWindow, setShowOptionsMenuWindow] = useState(false);
 
   const toggleShowOptionsMenu = () => {
+    show && setShow(null);
     setShowOptionsMenuWindow((prev) => !prev);
     setShowOptionsMenuLabel(false);
+  };
+
+  const handleOpenClose = (option) => {
+    setShow((prev) => (prev === option ? null : option));
+    console.log(show);
   };
 
   return (
@@ -52,28 +52,31 @@ export default function OptionsMenu(props) {
           {userIsTemp ? "Temporary user:" : "Logged in:"} {user.username}
         </div>
 
-        <ChangeUsername values={{ user, setUser, show, setShow }} />
+        <ChangeUsername values={{ user, setUser, show, handleOpenClose }} />
 
         {userIsTemp && (
-          <SaveAccount values={{ user, setUser, show, setShow }} />
+          <SaveAccount values={{ user, setUser, show, handleOpenClose }} />
         )}
 
         {!userIsTemp && (
           <LogOut
-            values={{ user, setUser, show, setShow, userIsTemp, setUserIsTemp }}
+            values={{
+              user,
+              setUser,
+              show,
+              handleOpenClose,
+              userIsTemp,
+              setUserIsTemp,
+            }}
           />
         )}
 
-        <DeleteUser values={{ user, setUser, show, setShow }} />
+        <DeleteUser values={{ user, setUser, show, handleOpenClose }} />
 
         <div className="option-div">
           <div
             className="option-label"
-            onClick={() =>
-              setShow((prev) => {
-                return { ...prev, about: !prev.about };
-              })
-            }
+            onClick={() => handleOpenClose("about")}
           >
             About{" "}
             <span className="material-icons option-arrow">
@@ -81,10 +84,11 @@ export default function OptionsMenu(props) {
             </span>
           </div>
           <div
-            style={show.about ? { height: "10ch" } : { height: "0" }}
-            className="about-text"
+            className={show === "about" ? "option-content" : "hidden-content"}
           >
-            Port is a communication system currently in development.
+            <div className="about-text">
+              Port is a communication system currently in development.
+            </div>
           </div>
         </div>
       </div>

@@ -5,13 +5,13 @@ With this project I'm creating the chat application I'd love to use. It should h
 <h3>Features (so far)</h3>
 <ul>
         <li>Private, encrypted conversations.</li>
-        <li>Live writing with chat partner on display.</li>
+        <li>Live typing on display.</li>
         <li>Only username needed to start.</li>
         <li>Only contact's username needed to connect with them.</li>
         <li>Optional account allows you to save your history and pick up where you left off.</li>
         <li>Live synching accross devices.</li>
         <li>Dark mode all the things forever.</li>
-        <li>More coming soon. Stay tuned!</li>
+        <li>More coming. Stay tuned!</li>
 </ul>
 <p float="left">
         <img height="300px" width="auto" src="https://lh3.googleusercontent.com/pw/ACtC-3dL3uKu0hniU_SbZoxe09kwoCC0c7t2gbZeHUFLgz_mZuanAHDT3La9Ha6RDlz0R5zyonORoPyxs7iGX6VYQA3Bp5wKsifeL9_4DpKFee7VFv31TSqZsqx0w1DRcAvQiD_46UsvryGNV2QcKXLFV_3lXA=w1380-h863-no?authuser=0" />
