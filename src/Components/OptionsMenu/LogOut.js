@@ -19,10 +19,8 @@ export default function LogOut({ values }) {
   };
 
   return (
-    <div className="option-div" style={{ height: "4ch" }}>
-      <div onClick={() => handleLogout()} className="option-label logout-label">
-        Log out
-      </div>
+    <div onClick={() => handleLogout()} className="logout-label">
+      Log out
     </div>
   );
 }

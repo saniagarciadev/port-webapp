@@ -48,27 +48,39 @@ export default function OptionsMenu(props) {
             : "options-window hide-options-window"
         }
       >
-        <div className="options-login-info">
-          {userIsTemp ? "Temporary user:" : "Logged in:"} {user.username}
-        </div>
-
-        <ChangeUsername values={{ user, setUser, show, handleOpenClose }} />
-
-        {userIsTemp && (
-          <SaveAccount values={{ user, setUser, show, handleOpenClose }} />
-        )}
-
-        {!userIsTemp && (
-          <LogOut
-            values={{
-              user,
-              setUser,
-              show,
-              handleOpenClose,
-              userIsTemp,
-              setUserIsTemp,
-            }}
-          />
+        {userIsTemp ? (
+          <>
+            <div className="options-login-info">
+              Temporary user: {user.username}
+              <p style={{ fontSize: "1rem" }}>
+                A temporary session expires when you close your web browser.
+              </p>
+            </div>
+            <SaveAccount
+              values={{ userIsTemp, setUser, show, handleOpenClose }}
+            />
+            <ChangeUsername values={{ user, setUser, show, handleOpenClose }} />
+          </>
+        ) : (
+          <>
+            <div className="options-login-info">
+              User: {user.username}
+              <LogOut
+                values={{
+                  user,
+                  setUser,
+                  show,
+                  handleOpenClose,
+                  userIsTemp,
+                  setUserIsTemp,
+                }}
+              />
+            </div>
+            <ChangeUsername values={{ user, setUser, show, handleOpenClose }} />
+            <SaveAccount
+              values={{ userIsTemp, setUser, show, handleOpenClose }}
+            />
+          </>
         )}
 
         <DeleteUser values={{ user, setUser, show, handleOpenClose }} />

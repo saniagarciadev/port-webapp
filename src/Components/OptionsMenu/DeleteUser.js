@@ -33,12 +33,15 @@ export default function DeleteUser({ values }) {
         <span className="material-icons option-arrow">keyboard_arrow_down</span>
       </div>
       <div className={show === "delete" ? "option-content" : "hidden-content"}>
+        <div className="option-info">
+          This will delete your user data from our database. Messages you sent
+          to other users will still be visible to them. They'll see your account
+          as "deleted" and without a username.
+        </div>
         <div onClick={() => handleDelete()} className="option-form">
-          <div className="option-info">
-            (Messages you sent to other users will still still be visible for
-            them.)
-          </div>
-          <div className="delete-user">Close and delete user</div>
+          <button type="submit" className="delete-user">
+            Delete login credentials and user data
+          </button>
         </div>
       </div>
     </div>

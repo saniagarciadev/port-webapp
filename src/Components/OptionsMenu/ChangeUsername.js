@@ -56,6 +56,9 @@ export default function ChangeUsername({ values }) {
             defaultValue={user.username}
             required
           ></input>
+          <button className="option-input" type="submit">
+            Submit
+          </button>
           <span
             style={
               usernameSuccess

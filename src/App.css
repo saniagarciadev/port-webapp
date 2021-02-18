@@ -354,16 +354,18 @@ body {
   top: 21px;
   right: 15px;
   max-width: 1000px;
-  max-height: 1000px;
+  max-height: 80vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 70px 30px 50px 30px;
   border: 2px solid rgb(37, 37, 37);
   border-radius: 5px;
+  color: rgba(255, 255, 255, 0.8);
   background-color: black;
   transition: 0.4s;
   z-index: 4;
+  overflow-y: auto;
 }
 
 @media (max-width: 700px) {
@@ -386,15 +388,13 @@ body {
 }
 
 .options-login-info {
-  position: absolute;
-  top: 0;
-  left: 10px;
-  height: 34px;
-  display: flex;
-  align-items: center;
-  margin: 10px;
+  width: 100%;
   font-size: 1.2rem;
-  color: grey;
+  text-align: left;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   transition: 0.3s;
 }
 
@@ -419,14 +419,12 @@ body {
   align-items: flex-end;
   justify-content: center;
   font-size: 1.2rem;
-  color: white;
-  opacity: 0.8;
   transition: 0.3s;
   cursor: pointer;
 }
 @media (hover: hover) {
   .option-label:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.03);
   }
 }
 
@@ -436,7 +434,7 @@ body {
   transition: 0.4s;
 }
 .option-content > * {
-  margin: 20px;
+  margin: 20px 40px;
 }
 
 .hidden-content {
@@ -446,31 +444,28 @@ body {
   transition: 0.4s;
 }
 .hidden-content > * {
-  margin: 20px;
+  margin: 20px 40px;
 }
 
 .success-check {
   display: inline-block;
 }
 
-.logout-label:hover {
-  text-decoration: underline;
+.logout-label {
+  display: inline-block;
+  width: fit-content;
+  padding: 5px 25px;
+  background-color: rgb(37, 37, 37);
+  border-radius: 50px;
+  transition: 0.4s;
 }
-
-.delete-user {
-  color: rgb(226, 142, 142);
-  font-weight: bold;
-  overflow: hidden;
+.logout-label:hover {
+  background-color: rgba(255, 255, 255, 0.2);
   cursor: pointer;
 }
 
 .delete-user:hover {
-  text-decoration: underline;
-}
-
-.option-info {
-  color: grey;
-  margin-bottom: 1ch;
+  color: orange;
 }
 
 .option-form {
@@ -478,7 +473,7 @@ body {
   flex-direction: column;
 }
 
-.option-input {
+.option-form * {
   color: white;
   padding: 5px;
   margin: 2ch;
@@ -489,6 +484,24 @@ body {
 
 .option-input:focus {
   outline: none;
+}
+
+.option-form button {
+  padding: 5px;
+  margin: 2ch;
+  border: 2px solid rgb(37, 37, 37);
+  border-radius: 5px;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgb(51, 51, 51);
+  cursor: pointer;
+}
+.option-form button:hover {
+  background-color: rgb(54, 54, 54);
+}
+
+.option-info {
+  max-width: 500px;
 }
 
 .dark-background {

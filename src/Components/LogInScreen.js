@@ -9,6 +9,7 @@ export default function LogInScreen() {
   const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [usernameSaved, setUsernameSaved] = useState("");
 
+  //~~ Check if username exists. If it doesn't, create temporary user ~~~~~~~~~~~~~~~~~~~~~~~~~~~
   const handleUsername = (e) => {
     e.preventDefault();
     const username = usernameRef.current["username"].value;
@@ -40,6 +41,7 @@ export default function LogInScreen() {
       .catch((err) => console.log(err));
   };
 
+  //~~ Check password input with login function ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   const handlePassword = (e) => {
     e.preventDefault();
     const data = {

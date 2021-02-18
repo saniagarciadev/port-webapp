@@ -6,6 +6,7 @@ function AuthProvider({ children }) {
   const [user, setUser] = useState();
   const [userIsTemp, setUserIsTemp] = useState(false);
 
+  //~~ Check on site load if user has an active session ~~~~~~~~~~~~~~~~~~~~~~~~~~~
   useEffect(() => {
     // if (document.cookie) {
     fetch(process.env.REACT_APP_PORT_SERVER + "/auth", {
@@ -33,6 +34,7 @@ function AuthProvider({ children }) {
     // }
   }, []);
 
+  //~~ Login ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   const login = (data) => {
     fetch(`${process.env.REACT_APP_PORT_SERVER}/login`, {
       method: "POST",
@@ -60,30 +62,23 @@ function AuthProvider({ children }) {
       .catch((err) => console.log(err));
   };
 
+  //~~ Save account ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   const register = (data) => {
-    console.log(data);
-    // fetch(`${process.env.REACT_APP_PORT_SERVER}/register`, {
-    //   method: "PUT",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   credentials: "include",
-    //   body: JSON.stringify(data),
-    // })
-    //   .then((res) => {
-    //     if (res.status === 200) {
-    //       return res.json();
-    //     } else {
-    //       console.log("Error saving account.");
-    //       return false;
-    //     }
-    //   })
-    //   .then((res) => {
-    //     res && setUser(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    fetch(`${process.env.REACT_APP_PORT_SERVER}/register`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      credentials: "include",
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setUser(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
