@@ -50,12 +50,12 @@ export default function OptionsMenu(props) {
       >
         {userIsTemp ? (
           <>
-            <div className="options-login-info">
+            <p className="options-login-info">
               Temporary user: {user.username}
-              <p style={{ fontSize: "1rem" }}>
-                A temporary session expires when you close your web browser.
-              </p>
-            </div>
+            </p>
+            <p className="options-login-info" style={{ fontSize: "1rem" }}>
+              A temporary session expires when you close your web browser.
+            </p>
             <SaveAccount
               values={{ userIsTemp, setUser, show, handleOpenClose }}
             />
@@ -63,7 +63,7 @@ export default function OptionsMenu(props) {
           </>
         ) : (
           <>
-            <div className="options-login-info">
+            <p className="options-login-info">
               User: {user.username}
               <LogOut
                 values={{
@@ -75,7 +75,7 @@ export default function OptionsMenu(props) {
                   setUserIsTemp,
                 }}
               />
-            </div>
+            </p>
             <ChangeUsername values={{ user, setUser, show, handleOpenClose }} />
             <SaveAccount
               values={{ userIsTemp, setUser, show, handleOpenClose }}

@@ -358,7 +358,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 70px 30px 50px 30px;
+  padding: 30px 30px 50px 30px;
   border: 2px solid rgb(37, 37, 37);
   border-radius: 5px;
   color: rgba(255, 255, 255, 0.8);
@@ -639,7 +639,8 @@ body {
 }
 
 .message-form {
-  width: 50%;
+  width: 100%;
+  max-width: 95%;
   height: 116px;
   position: fixed;
   bottom: 0;
@@ -652,9 +653,7 @@ body {
 
 .message-input {
   font-size: 25px;
-  width: 50%;
-  margin-left: auto;
-  margin-right: 1px;
+  text-align: center;
   padding: 5px 40px;
   border: 1.5px solid rgb(37, 37, 37);
   background-color: rgb(37, 37, 37);
@@ -674,17 +673,7 @@ body {
   color: rgb(255, 189, 158);
 }
 
-@media (max-width: 700px) {
-  .message-input {
-    width: 50vw;
-  }
-}
-
 .message-input:focus {
-  outline: none;
-}
-
-#message-form input:focus {
   outline: none;
 }
 

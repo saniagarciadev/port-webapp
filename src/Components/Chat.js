@@ -1,12 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
-// import { useHistory } from "react-router-dom";
+import React, { useRef, useEffect } from "react";
 import "../App.css";
 import { useAuth } from "../Context/AuthContext";
 import { useChat } from "../Context/ChatContext";
 import { useSocket } from "../Context/SocketContext";
 
 export default function Chat(props) {
-  // const history = useHistory();
   const {
     createContactsList,
     chatLog,
@@ -17,7 +15,6 @@ export default function Chat(props) {
   const { user } = useAuth();
   const chatBottom = useRef();
   const messageRef = useRef();
-  // const [chatHeight, setChatHeight] = useState("");
   const { socket, startSocketConnection } = useSocket();
 
   const scrollToBottom = () => {
@@ -29,9 +26,6 @@ export default function Chat(props) {
   useEffect(() => {
     createContactsList(user.connections);
     startSocketConnection(user);
-
-    // let windowHeight = window.innerHeight;
-    // setChatHeight(`${windowHeight}px`);
   }, []);
 
   useEffect(() => {

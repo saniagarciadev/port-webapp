@@ -41,7 +41,7 @@ export default function LogInScreen() {
       .catch((err) => console.log(err));
   };
 
-  //~~ Check password input with login function ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  //~~ Run login credentials through login function ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   const handlePassword = (e) => {
     e.preventDefault();
     const data = {
