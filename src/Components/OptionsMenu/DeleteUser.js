@@ -19,6 +19,7 @@ export default function DeleteUser({ values }) {
     })
       .then((res) => {
         if (res.status === 200) {
+          console.log("deleted");
           socket.emit("user deleted");
           setUser(null);
         }

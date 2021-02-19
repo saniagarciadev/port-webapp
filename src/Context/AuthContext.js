@@ -8,7 +8,6 @@ function AuthProvider({ children }) {
 
   //~~ Check on site load if user has an active session ~~~~~~~~~~~~~~~~~~~~~~~~~~~
   useEffect(() => {
-    // if (document.cookie) {
     fetch(process.env.REACT_APP_PORT_SERVER + "/auth", {
       method: "GET",
       headers: {
@@ -25,13 +24,11 @@ function AuthProvider({ children }) {
       })
       .then((res) => {
         if (res) {
-          // console.log(res.data[0]);
           setUserIsTemp(res.status === "temp" ? true : false);
           setUser(res);
         }
       })
       .catch((err) => console.log(err));
-    // }
   }, []);
 
   //~~ Login ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -61,7 +58,11 @@ function AuthProvider({ children }) {
     })
       .then((res) => res.json())
       .then((res) => {
+        console.log(res);
         setUser(res);
+        setUserIsTemp(() => {
+          return false;
+        });
       })
       .catch((err) => {
         console.log(err);

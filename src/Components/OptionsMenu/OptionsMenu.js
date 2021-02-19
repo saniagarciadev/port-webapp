@@ -19,7 +19,6 @@ export default function OptionsMenu(props) {
 
   const handleOpenClose = (option) => {
     setShow((prev) => (prev === option ? null : option));
-    console.log(show);
   };
 
   return (
@@ -64,7 +63,7 @@ export default function OptionsMenu(props) {
         ) : (
           <>
             <p className="options-login-info">
-              User: {user.username}
+              {user.username}
               <LogOut
                 values={{
                   user,
