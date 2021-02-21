@@ -7,6 +7,7 @@ I believe there's a better way to use the latest web technologies to create comm
 With this project I'm creating the communication system I'd love to use, however long it takes.
 
 This means:
+</p>
 <ul>
         <li>A fluid and animated UI that's a joy to use.</li>
         <li>P2P transfers with pause/resume for audio/video/data messages
@@ -16,7 +17,9 @@ This means:
         <li>Signal-level encryption.</li>
         <li>Unique, fun communication features. Some top secret stuff here...</li>
 </ul>
-What you see is a working alpha version on which to build upon. It has the following features so far:
+<p>
+What you see is just an alpha version on which to build upon. It has the following features so far:
+</p>
 <ul>
         <li>Private text-based conversations.</li>
         <li>Live typing with chat partner.</li>
@@ -30,3 +33,11 @@ What you see is a working alpha version on which to build upon. It has the follo
         <img height="300px" width="auto" src="https://lh3.googleusercontent.com/pw/ACtC-3da1ft-OxXtsyLQz0cJfc4aICCQkveb7y_pOds0VKwwq51KW-OVzBwcJYqXxhsrC6GeF-4ZrNtfhAclklwtviyPNcdImHVH81vUwcW2etByRZcylpZBtEBqzTWzbJdwNIp8Cwtou2sAC_RnIy9T4-dHfA=w450-h972-no?authuser=0" />
         <img height="300px" width="auto" src="https://lh3.googleusercontent.com/pw/ACtC-3dbjAReaOG5-EjW7pjWvCtXizt9cJ-wOtYct2lGPpz-O74YWcqPT7NvVue92r9Mx5cuHvdkumtpjbpWGGV_-up7fGL2e_9e0Zkg6hXk6Bzu5f530sMcPjmmpaWVDbNRxkVflunGXWCnopclGM8HI7hPMQ=w450-h972-no?authuser=0" />
 </p>
+
+<h3>How to use:</h3>
+<ul>
+        <li>Enter a username.</li>
+        <li>Enter contact's username.</li>
+        <li>Chat away.</li>
+</ul>
+
