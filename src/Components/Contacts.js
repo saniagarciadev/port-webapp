@@ -1,74 +1,82 @@
-import React, { useState, useEffect } from "react";
-import { useAuth } from "../Context/AuthContext";
+import React from "react";
 import { useChat } from "../Context/ChatContext";
 import { useSocket } from "../Context/SocketContext";
+import { useAuth } from "../Context/AuthContext";
 
 export default function Contacts(props) {
+  const { user } = useAuth();
+
   const {
-    // setUser,
-    // chatLog,
     setChatLog,
     contactsList,
-    currConversation,
-    setCurrConversation,
+    setContactsList,
+    recipient,
+    setRecipient,
   } = useChat();
-  const { user } = useAuth();
   const { socket } = useSocket();
-  const [selectedContact, setSelectedContact] = useState("");
-
-  useEffect(() => {
-    currConversation && console.log(currConversation);
-  }, [currConversation, currConversation]);
 
   const openConversation = async (contact) => {
-    // if (currConversation.username !== contact.username) {
-    const roomId = (await contact.isLive)
-      ? contact.roomId
-      : `${contact.username}${user.username}`;
-    const userData = {
-      userId: user._id,
-      recipientId: contact._id,
-      isLive: true,
-      roomId: roomId,
-    };
-    socket.emit("join room", userData);
-    setCurrConversation(() => {
-      return { ...contact, roomId: userData.roomId };
-    });
+    let myRecipient = contact;
+    if (contact.status === "live") {
+      myRecipient.status = "together";
+    }
+    socket.emit("live", JSON.stringify(contact));
     socket.once("chat history", (messages) => {
       setChatLog(messages);
     });
-    setSelectedContact(contact._id);
-    // }
+    setContactsList(user.connections.filter((c) => c._id !== contact._id));
+    setRecipient(myRecipient);
   };
 
-  const contactClass = (contact) => {
-    if (contact.isLive && contact._id === selectedContact) {
-      return "contact live-contact-open";
-    } else if (contact.isLive) {
-      return "contact live-contact";
-    } else if (contact.isOnline && contact._id === selectedContact) {
-      return "contact online-contact-open";
-    } else if (contact.isOnline) {
-      return "contact online-contact";
-    } else if (contact._id === selectedContact) {
-      return "contact selected-contact";
-    } else {
-      return "contact inactive-contact";
-    }
+  const closeConversation = async (recipient) => {
+    socket.emit("status", {
+      contact: JSON.stringify(recipient),
+      status: "online",
+    });
+    let recipientStatus;
+    recipient.status === "together"
+      ? (recipientStatus = "live")
+      : (recipientStatus = recipient.status);
+    setContactsList((prev) => {
+      return [
+        ...prev,
+        {
+          _id: recipient._id,
+          username: recipient.username,
+          status: recipientStatus,
+        },
+      ];
+    });
+    setRecipient({
+      username: "universe",
+      status: "online",
+    });
   };
 
   return (
     <div className="connections">
       {contactsList &&
-        contactsList.map((contact, index) => (
+        contactsList.map((contact) => (
           <span
             onClick={() => openConversation(contact)}
-            className={contactClass(contact)}
+            className={contact.status ? `contact ${contact.status}` : "contact"}
           >
             {contact.username}
           </span>
         ))}
+      {recipient.username !== "universe" && (
+        <>
+          <span
+            className={
+              recipient.status ? `contact ${recipient.status}` : "contact"
+            }
+          >
+            {" "}
+            {recipient.username}
+          </span>
+          <button onClick={() => closeConversation(recipient)}>x</button>
+        </>
+      )}
     </div>
   );
 }

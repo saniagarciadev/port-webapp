@@ -4,7 +4,7 @@ import { useChat } from "../Context/ChatContext";
 
 export default function AddConnection(props) {
   const { user } = useAuth();
-  const { currConversation, createContactsList } = useChat();
+  const { recipient, createContactsList } = useChat();
   const addContactForm = useRef();
   const [showAddInput, setShowAddInput] = useState(false);
   const [showAddTitle, setShowAddTitle] = useState(false);
@@ -13,7 +13,7 @@ export default function AddConnection(props) {
   useEffect(() => {
     setShowAddInput(false);
     setShowCloseButton(false);
-  }, [currConversation]);
+  }, [recipient]);
 
   const handleAdd = async (e) => {
     e.preventDefault();

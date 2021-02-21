@@ -130,6 +130,7 @@ body {
 }
 
 .contact {
+  color: lightgrey;
   margin: 0px 3px;
   padding: 0px 10px 3px 10px;
   border: 2px solid black;
@@ -146,27 +147,30 @@ body {
   background-color: rgb(255, 249, 246);
 }
 
-.inactive-contact {
-  color: lightgrey;
-}
-
-.online-contact {
+.online {
   color: lightgrey;
   border: 2px solid grey;
 }
 
-.live-contact {
+.live {
   color: rgb(255, 189, 158);
   border: 2px solid rgb(255, 189, 158);
   border-radius: 50px;
   background-color: black;
 }
 
+.together {
+  color: black;
+  border: 2px solid rgb(255, 189, 158);
+  border-radius: 50px;
+  background-color: rgb(255, 189, 158);
+}
+
 .live-contact-open {
   font-weight: bold;
   font-style: italic;
   padding: 0px 20px 3px 20px;
-  border-radius: 5px;
+  border-radius: 50px;
   color: black;
   background-color: rgb(255, 189, 158);
 }
@@ -180,20 +184,20 @@ body {
 }
 
 @media (hover: hover) {
-  .inactive-contact:hover {
+  .contact:hover {
     border: 2px solid grey;
   }
-  .online-contact:hover {
-    color: rgb(255, 189, 158);
-    border: 2px solid rgb(255, 189, 158);
+  .online:hover {
+    color: white;
+    background-color: grey;
   }
-  .online-contact-open {
-    border: 2px solid rgb(255, 189, 158);
-  }
-  .live-contact:hover {
+  .live:hover {
     color: black;
     border: 2px solid rgb(255, 189, 158);
     background-color: rgb(255, 189, 158);
+  }
+  .online-contact-open {
+    border: 2px solid rgb(255, 189, 158);
   }
 }
 
@@ -667,7 +671,7 @@ body {
   transition: 0.4s;
 }
 
-.live-message-input {
+.live-input {
   border: 1px solid rgb(255, 189, 158);
   background-color: black;
   color: rgb(255, 189, 158);

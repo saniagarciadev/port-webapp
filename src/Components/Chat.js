@@ -5,28 +5,17 @@ import { useChat } from "../Context/ChatContext";
 import { useSocket } from "../Context/SocketContext";
 
 export default function Chat(props) {
-  const {
-    createContactsList,
-    chatLog,
-    setChatLog,
-    currConversation,
-    theirLiveText,
-  } = useChat();
+  const { chatLog, setChatLog, recipient, theirLiveText } = useChat();
   const { user } = useAuth();
   const chatBottom = useRef();
   const messageRef = useRef();
-  const { socket, startSocketConnection } = useSocket();
+  const { socket } = useSocket();
 
   const scrollToBottom = () => {
     if (chatBottom.current) {
       chatBottom.current.scrollIntoView({ behavior: "smooth" });
     }
   };
-
-  useEffect(() => {
-    createContactsList(user.connections);
-    startSocketConnection(user);
-  }, []);
 
   useEffect(() => {
     scrollToBottom();
@@ -38,15 +27,11 @@ export default function Chat(props) {
       return;
     }
 
-    const messageData = {
+    socket.emit("message", {
       senderId: user._id,
-      recipientId: currConversation._id,
+      recipientId: recipient._id,
       content: messageRef.current["message"].value,
-    };
-
-    const roomId = currConversation.roomId;
-
-    socket.emit("message", messageData, roomId);
+    });
 
     messageRef.current["message"].value = "";
   };
@@ -55,27 +40,17 @@ export default function Chat(props) {
     socket.emit("live text", e.target.value);
   };
 
-  const messageClass = (m) => {
-    if (currConversation.isLive && user._id === m.senderId) {
-      return "my-message";
-    } else if (user._id === m.senderId) {
-      return "my-message";
-    } else {
-      return "their-message";
-    }
-  };
-
   return (
     <div className="Chat">
       <div ref={chatBottom}></div>
       {chatLog && (
         <ul className="chat-log">
           <div className="chat-bottom"></div>
-          {currConversation.isLive && theirLiveText && (
+          {/* {recipient.isLive && theirLiveText && (
             <li>
               <div className="their-live-text">{theirLiveText}</div>
             </li>
-          )}
+          )} */}
           {chatLog.map((m, index) => (
             <li
               key={index}
@@ -85,7 +60,13 @@ export default function Chat(props) {
                   : "their-message-line"
               }
             >
-              <div className={user && messageClass(m)}>{m.content}</div>
+              <div
+                className={
+                  user._id === m.senderId ? "my-message" : "their-message"
+                }
+              >
+                {m.content}
+              </div>
             </li>
           ))}
         </ul>
@@ -93,11 +74,11 @@ export default function Chat(props) {
       <form onSubmit={handleMessage} className="message-form" ref={messageRef}>
         <input
           onChange={(e) => {
-            currConversation.isLive && handleLiveText(e);
+            recipient.isLive && handleLiveText(e);
           }}
           className={
-            currConversation.isLive
-              ? "message-input live-message-input"
+            recipient.status === "together"
+              ? "message-input live-input"
               : "message-input"
           }
           name="message"

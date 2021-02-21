@@ -14,83 +14,55 @@ export function SocketProvider({ children }) {
   const { user } = useAuth();
   const {
     contactsList,
+    recipient,
     setChatLog,
-    currConversation,
-    updateOnlineStatus,
-    updateLiveStatus,
+    updateContactStatus,
     theirLiveText,
     setTheirLiveText,
   } = useChat();
-  // const [theirLiveCursor, setTheirLiveCursor] = useState(0);
 
-  const startSocketConnection = (userObj) => {
+  const startSocketConnection = async (userObj) => {
     setSocket(
       io(`${process.env.REACT_APP_PORT_SERVER}/chat`, {
-        query: userObj,
+        query: {
+          _id: userObj._id,
+          username: userObj.username,
+          connections: JSON.stringify(userObj.connections),
+        },
         withCredentials: true,
       })
     );
   };
 
-  const isContact = async (userData) => {
-    if (contactsList) {
-      const found = await contactsList.find(
-        (contact) => userData.userId === contact._id
-      );
-      return found ? true : false;
-    } else {
-      return false;
-    }
-  };
-
-  const clientIsRecipient = (userData) => {
-    const answer = userData.recipientId === user._id;
-    return answer;
-  };
+  useEffect(() => {
+    socket && socket.close();
+    user && startSocketConnection(user);
+  }, [user]);
 
   useEffect(() => {
-    if (socket && user) {
-      socket.on("connect", () => {
-        socket.emit("online status", { userId: user._id, isOnline: true });
-        console.log(`Send status: ${user.username} is online.`);
-      });
-
-      socket.on("user status update", (userData) => {
-        const userIsContact = isContact(userData);
-        if (userIsContact) {
-          updateOnlineStatus(userData);
-        }
-        socket.emit("user status back", { userId: user._id, isOnline: true });
-      });
-
-      socket.on("user status back", (userData) => {
-        const userIsContact = isContact(userData);
-        if (userIsContact) {
-          updateOnlineStatus(userData);
+    if (socket) {
+      socket.on("get status", async (userId) => {
+        const isContact = await contactsList.find((c) => userId === c._id);
+        if (isContact) {
+          updateContactStatus({ userId, status: "online" });
+          const myStatus = (await recipient._id) === userId ? "live" : "online";
+          socket.emit("status", {
+            contact: JSON.stringify(isContact),
+            status: myStatus,
+          });
         }
       });
-
-      socket.on("user is live", async (userData) => {
-        const userIsContact = await isContact(userData);
-        const isLive = clientIsRecipient(userData);
-        if (userIsContact) {
-          updateLiveStatus(userData, isLive);
+      socket.on("status", async (userData) => {
+        updateContactStatus(userData);
+      });
+      socket.on("message", async (msg) => {
+        if (msg.senderId === recipient._id || msg.senderId === user._id) {
+          setChatLog((prev) => {
+            return [msg, ...prev];
+          });
+        } else {
+          console.log(`Notification: '${msg.content}'`);
         }
-        console.log(userData);
-      });
-
-      socket.on("user logged out", (userData) => {
-        updateOnlineStatus(userData);
-      });
-
-      socket.on("message", (msg) => {
-        if (theirLiveText) {
-          setTheirLiveText("");
-        }
-        setChatLog((prevConversation) => [msg, ...prevConversation]);
-      });
-      socket.on("live text", async (liveText) => {
-        setTheirLiveText(liveText);
       });
     }
   }, [socket]);
