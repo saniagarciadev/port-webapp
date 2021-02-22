@@ -120,6 +120,7 @@ body {
 }
 
 .connections {
+  width: 100%;
   padding: 10px 10px 10px 0px;
   margin-left: 15px;
   margin-right: auto;
@@ -127,6 +128,11 @@ body {
   background-color: black;
   display: flex;
   flex-direction: row;
+}
+
+.status {
+  display: block;
+  font-size: x-small;
 }
 
 .contact {
@@ -139,9 +145,10 @@ body {
   transition: 0.3s;
 }
 
-.selected-contact {
+.recipient {
   color: black;
   font-weight: bold;
+  margin: 0px auto;
   padding: 0px 20px 3px 20px;
   border-radius: 5px;
   background-color: rgb(255, 249, 246);
@@ -162,25 +169,7 @@ body {
 .together {
   color: black;
   border: 2px solid rgb(255, 189, 158);
-  border-radius: 50px;
   background-color: rgb(255, 189, 158);
-}
-
-.live-contact-open {
-  font-weight: bold;
-  font-style: italic;
-  padding: 0px 20px 3px 20px;
-  border-radius: 50px;
-  color: black;
-  background-color: rgb(255, 189, 158);
-}
-
-.online-contact-open {
-  color: rgb(255, 189, 158);
-  padding: 0px 20px 3px 20px;
-  border: 2px solid rgb(255, 189, 158);
-  border-radius: 5px;
-  background-color: black;
 }
 
 @media (hover: hover) {
@@ -195,9 +184,6 @@ body {
     color: black;
     border: 2px solid rgb(255, 189, 158);
     background-color: rgb(255, 189, 158);
-  }
-  .online-contact-open {
-    border: 2px solid rgb(255, 189, 158);
   }
 }
 

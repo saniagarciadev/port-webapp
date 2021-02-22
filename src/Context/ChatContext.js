@@ -13,21 +13,11 @@ function ChatProvider({ children }) {
   });
   const [theirLiveText, setTheirLiveText] = useState("");
 
-  const updateContactStatus = ({ userId, status }) => {
-    // if (status === "live" || userId === recipient._id) {
-    //   setRecipient()
-    // }
-    setContactsList((prev) =>
-      prev.map((c) => (c._id === userId ? { ...c, status } : c))
-    );
-  };
-
   const values = {
     chatLog,
     setChatLog,
     contactsList,
     setContactsList,
-    updateContactStatus,
     recipient,
     setRecipient,
     theirLiveText,

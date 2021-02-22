@@ -16,7 +16,8 @@ export function SocketProvider({ children }) {
     contactsList,
     recipient,
     setChatLog,
-    updateContactStatus,
+    setContactsList,
+    setRecipient,
     theirLiveText,
     setTheirLiveText,
   } = useChat();
@@ -41,19 +42,22 @@ export function SocketProvider({ children }) {
 
   useEffect(() => {
     if (socket) {
-      socket.on("get status", async (userId) => {
-        const isContact = await contactsList.find((c) => userId === c._id);
-        if (isContact) {
-          updateContactStatus({ userId, status: "online" });
-          const myStatus = (await recipient._id) === userId ? "live" : "online";
-          socket.emit("status", {
-            contact: JSON.stringify(isContact),
-            status: myStatus,
-          });
-        }
+      socket.on("ask status", async (userId) => {
+        setContactsList((prev) =>
+          prev.map((c) => (c._id === userId ? { ...c, status: "online" } : c))
+        );
+        const myStatus = recipient._id === userId ? "live" : "online";
+        socket.emit("send status", {
+          userId,
+          status: myStatus,
+        });
+        console.log("contact online");
       });
-      socket.on("status", async (userData) => {
-        updateContactStatus(userData);
+      socket.on("status", async ({ userId, status }) => {
+        setContactsList((prev) =>
+          prev.map((c) => (c._id === userId ? { ...c, status } : c))
+        );
+        console.log(status);
       });
       socket.on("message", async (msg) => {
         if (msg.senderId === recipient._id || msg.senderId === user._id) {

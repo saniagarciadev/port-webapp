@@ -33,7 +33,6 @@ export default function AddConnection(props) {
     if (contactExists) {
       console.log(`User ${newContact.username} is already a contact.`);
     } else {
-      // console.log(`Request to add this contact: ${JSON.stringify(newContact)}`);
       fetch(`${process.env.REACT_APP_PORT_SERVER}/connections`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -45,9 +44,6 @@ export default function AddConnection(props) {
           if (res.success === true) {
             console.log(res.updatedContacts);
             createContactsList(res.updatedContacts);
-            // setUser((prevUser) => {
-            //   return { ...prevUser, connections: res.updatedContacts };
-            // });
           } else {
             console.log(res.message);
           }
