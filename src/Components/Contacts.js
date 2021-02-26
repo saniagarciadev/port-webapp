@@ -1,26 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useChat } from "../Context/ChatContext";
 import { useSocket } from "../Context/SocketContext";
 
 export default function Contacts(props) {
-  const { setChatLog, contactsList, recipient, setRecipient } = useChat();
+  const {
+    setChatLog,
+    contactsList,
+    recipient,
+    setRecipient,
+    setContactsList,
+  } = useChat();
   const { socket } = useSocket();
 
+  useEffect(() => {
+    const myRecipient = contactsList.find((c) => c.recipient);
+    myRecipient ? setRecipient(myRecipient) : setRecipient(null);
+  }, [contactsList]);
+
   const openConversation = async (contact) => {
-    socket.emit("set recipient", contact._id);
+    console.log(contact);
+    setContactsList((prev) =>
+      prev.map((c) => (c._id === contact._id ? { ...c, recipient: true } : c))
+    );
+    socket.emit("send status", {
+      userId: contact._id,
+      socketId: contact.socket ? contact.socket : null,
+      status: "live",
+    });
     socket.once("chat history", (messages) => {
       setChatLog(messages);
     });
-    setRecipient(contact);
   };
 
-  const closeConversation = async (recipient) => {
+  const closeConversation = async (contact) => {
+    setContactsList((prev) =>
+      prev.map((c) => (c._id === contact._id ? { ...c, recipient: false } : c))
+    );
     socket.emit("send status", {
-      userId: recipient._id,
-      status: "online",
-    });
-    setRecipient({
-      username: "universe",
+      userId: contact._id,
+      socketId: contact.socket ? contact.socket : null,
       status: "online",
     });
     setChatLog([]);
@@ -44,7 +62,8 @@ export default function Contacts(props) {
             </span>
           </>
         ))}
-      {recipient.username !== "universe" && (
+      <button onClick={() => socket.emit("log")}>log</button>
+      {recipient && (
         <>
           <span
             onClick={() => openConversation(recipient)}
@@ -54,8 +73,10 @@ export default function Contacts(props) {
           >
             {" "}
             {recipient.username}
+            <div className="status">
+              {recipient.status ? recipient.status : "offline"}
+            </div>
           </span>
-          <span>{recipient.status}</span>
           <button onClick={() => closeConversation(recipient)}>x</button>
         </>
       )}

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
+import { useSocket } from "../../Context/SocketContext";
 import ChangeUsername from "./ChangeUsername";
 import SaveAccount from "./SaveAccount";
 import LogOut from "./LogOut";
@@ -7,6 +8,7 @@ import DeleteUser from "./DeleteUser";
 
 export default function OptionsMenu(props) {
   const { user, setUser, userIsTemp, setUserIsTemp } = useAuth();
+  const { online } = useSocket();
   const [show, setShow] = useState(null);
   const [showOptionsMenuLabel, setShowOptionsMenuLabel] = useState(false);
   const [showOptionsMenuWindow, setShowOptionsMenuWindow] = useState(false);
@@ -24,6 +26,7 @@ export default function OptionsMenu(props) {
   return (
     <div>
       <div className="options-button">
+        {online ? "online" : "offline"}
         <span
           className={`options-label ${
             showOptionsMenuLabel ? "show-options-label" : "hide-options-label"

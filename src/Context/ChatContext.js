@@ -7,10 +7,7 @@ function ChatProvider({ children }) {
   const { user } = useAuth();
   const [chatLog, setChatLog] = useState(null);
   const [contactsList, setContactsList] = useState(user.connections);
-  const [recipient, setRecipient] = useState({
-    username: "universe",
-    status: "online",
-  });
+  const [recipient, setRecipient] = useState(null);
   const [theirLiveText, setTheirLiveText] = useState("");
 
   const values = {

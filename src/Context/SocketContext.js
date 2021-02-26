@@ -11,24 +11,26 @@ export function useSocket() {
 
 export function SocketProvider({ children }) {
   const [socket, setSocket] = useState(null);
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
+  const [online, setOnline] = useState(false);
   const {
     contactsList,
     recipient,
+    setRecipient,
     setChatLog,
     setContactsList,
-    setRecipient,
     theirLiveText,
     setTheirLiveText,
   } = useChat();
 
   const startSocketConnection = async (userObj) => {
+    const contactIds = await userObj.connections.map((c) => c._id);
     setSocket(
       io(`${process.env.REACT_APP_PORT_SERVER}/chat`, {
         query: {
           _id: userObj._id,
           username: userObj.username,
-          connections: JSON.stringify(userObj.connections),
+          connections: JSON.stringify(contactIds),
         },
         withCredentials: true,
       })
@@ -42,31 +44,56 @@ export function SocketProvider({ children }) {
 
   useEffect(() => {
     if (socket) {
-      socket.on("ask status", async (userId) => {
-        setContactsList((prev) =>
-          prev.map((c) => (c._id === userId ? { ...c, status: "online" } : c))
-        );
-        const myStatus = recipient._id === userId ? "live" : "online";
-        socket.emit("send status", {
-          userId,
-          status: myStatus,
-        });
-        console.log("contact online");
+      socket.on("connect", () => {
+        console.log("socket connected");
+        setOnline(true);
       });
-      socket.on("status", async ({ userId, status }) => {
-        setContactsList((prev) =>
-          prev.map((c) => (c._id === userId ? { ...c, status } : c))
-        );
-        console.log(status);
-      });
-      socket.on("message", async (msg) => {
-        if (msg.senderId === recipient._id || msg.senderId === user._id) {
-          setChatLog((prev) => {
-            return [msg, ...prev];
+      socket.on("ask status", async ({ userId, socketId, status }) => {
+        console.log("ask status", userId, socketId, status);
+        const isContact = await contactsList.find((c) => c._id === userId);
+        if (isContact) {
+          setContactsList((prev) =>
+            prev.map((c) =>
+              c._id === userId
+                ? { ...c, status: "online", socketId: socketId }
+                : c
+            )
+          );
+          const myStatus =
+            recipient && recipient._id === userId ? "live" : "online";
+          socket.emit("send status", {
+            userId,
+            socketId: socketId,
+            status: myStatus,
           });
-        } else {
-          console.log(`Notification: '${msg.content}'`);
+          // console.log(`Contact connected: ${isContact.username}`);
         }
+      });
+      socket.on("status", async ({ userId, socketId, status }) => {
+        console.log("status", userId, socketId, status);
+        setContactsList((prev) =>
+          prev.map((c) =>
+            c._id === userId ? { ...c, socket: socketId, status } : c
+          )
+        );
+        socket.emit("update contact", { userId, socketId, status });
+      });
+      socket.on("msg sent", async (msg) => {
+        setChatLog((prev) => {
+          return [msg, ...prev];
+        });
+      });
+      socket.on("msg received", async (msg) => {
+        console.log(`Notification: ${msg.content}`);
+      });
+      socket.on("liveMsg received", (msg) => {
+        setChatLog((prev) => {
+          return [msg, ...prev];
+        });
+      });
+      socket.on("disconnect", (reason) => {
+        setOnline(false);
+        console.log(reason);
       });
     }
   }, [socket]);
@@ -74,6 +101,8 @@ export function SocketProvider({ children }) {
   const values = {
     socket,
     setSocket,
+    online,
+    setOnline,
     startSocketConnection,
   };
 

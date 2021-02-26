@@ -27,7 +27,7 @@ export default function Chat(props) {
       return;
     }
 
-    socket.emit("message", {
+    socket.emit("send msg", {
       senderId: user._id,
       recipientId: recipient._id,
       content: messageRef.current["message"].value,
@@ -36,9 +36,9 @@ export default function Chat(props) {
     messageRef.current["message"].value = "";
   };
 
-  const handleLiveText = (e) => {
-    socket.emit("live text", e.target.value);
-  };
+  // const handleLiveText = (e) => {
+  //   socket.emit("live text", e.target.value);
+  // };
 
   return (
     <div className="Chat">
@@ -71,20 +71,26 @@ export default function Chat(props) {
           ))}
         </ul>
       )}
-      <form onSubmit={handleMessage} className="message-form" ref={messageRef}>
-        <input
-          onChange={(e) => {
-            recipient.isLive && handleLiveText(e);
-          }}
-          className={
-            recipient.status === "together"
-              ? "message-input live-input"
-              : "message-input"
-          }
-          name="message"
-          autoComplete="off"
-        ></input>
-      </form>
+      {recipient && (
+        <form
+          onSubmit={handleMessage}
+          className="message-form"
+          ref={messageRef}
+        >
+          <input
+            // onChange={(e) => {
+            //   recipient.isLive && handleLiveText(e);
+            // }}
+            className={
+              recipient.status === "live"
+                ? "message-input live-input"
+                : "message-input"
+            }
+            name="message"
+            autoComplete="off"
+          ></input>
+        </form>
+      )}
     </div>
   );
 }
