@@ -16,11 +16,9 @@ export function SocketProvider({ children }) {
   const {
     contactsList,
     recipient,
-    setRecipient,
+    setIncoming,
     setChatLog,
     setContactsList,
-    theirLiveText,
-    setTheirLiveText,
   } = useChat();
 
   const startSocketConnection = async (userObj) => {
@@ -66,14 +64,13 @@ export function SocketProvider({ children }) {
             socketId: socketId,
             status: myStatus,
           });
-          // console.log(`Contact connected: ${isContact.username}`);
         }
       });
       socket.on("status", async ({ userId, socketId, status }) => {
         console.log("status", userId, socketId, status);
         setContactsList((prev) =>
           prev.map((c) =>
-            c._id === userId ? { ...c, socket: socketId, status } : c
+            c._id === userId ? { ...c, socketId: socketId, status } : c
           )
         );
         socket.emit("update contact", { userId, socketId, status });
@@ -83,8 +80,9 @@ export function SocketProvider({ children }) {
           return [msg, ...prev];
         });
       });
+
       socket.on("msg received", async (msg) => {
-        console.log(`Notification: ${msg.content}`);
+        setIncoming(msg);
       });
       socket.on("liveMsg received", (msg) => {
         setChatLog((prev) => {

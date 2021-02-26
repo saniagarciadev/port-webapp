@@ -30,6 +30,7 @@ export default function Chat(props) {
     socket.emit("send msg", {
       senderId: user._id,
       recipientId: recipient._id,
+      socketId: recipient.socketId,
       content: messageRef.current["message"].value,
     });
 

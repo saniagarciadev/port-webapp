@@ -13,20 +13,39 @@ export default function Contacts(props) {
   const { socket } = useSocket();
 
   useEffect(() => {
-    const myRecipient = contactsList.find((c) => c.recipient);
-    myRecipient ? setRecipient(myRecipient) : setRecipient(null);
+    setRecipient(contactsList.find((c) => c.recipient));
   }, [contactsList]);
 
   const openConversation = async (contact) => {
-    console.log(contact);
-    setContactsList((prev) =>
-      prev.map((c) => (c._id === contact._id ? { ...c, recipient: true } : c))
-    );
-    socket.emit("send status", {
-      userId: contact._id,
-      socketId: contact.socket ? contact.socket : null,
-      status: "live",
-    });
+    contact.socketId &&
+      socket.emit("send status", {
+        userId: contact._id,
+        socketId: contact.socketId,
+        status: "live",
+      });
+    if (recipient) {
+      setContactsList((prev) =>
+        prev.map((c) => {
+          if (c._id === recipient._id) {
+            return { ...c, recipient: false };
+          } else if (c._id === contact._id) {
+            return { ...c, recipient: true };
+          } else {
+            return c;
+          }
+        })
+      );
+      recipient.socketId &&
+        socket.emit("send status", {
+          userId: recipient._id,
+          socketId: recipient.socketId,
+          status: "online",
+        });
+    } else {
+      setContactsList((prev) =>
+        prev.map((c) => (c._id === contact._id ? { ...c, recipient: true } : c))
+      );
+    }
     socket.once("chat history", (messages) => {
       setChatLog(messages);
     });
@@ -36,11 +55,12 @@ export default function Contacts(props) {
     setContactsList((prev) =>
       prev.map((c) => (c._id === contact._id ? { ...c, recipient: false } : c))
     );
-    socket.emit("send status", {
-      userId: contact._id,
-      socketId: contact.socket ? contact.socket : null,
-      status: "online",
-    });
+    contact.socketId &&
+      socket.emit("send status", {
+        userId: contact._id,
+        socketId: contact.socketId,
+        status: "online",
+      });
     setChatLog([]);
   };
 
@@ -62,7 +82,7 @@ export default function Contacts(props) {
             </span>
           </>
         ))}
-      <button onClick={() => socket.emit("log")}>log</button>
+      <button onClick={() => console.log(recipient)}>log</button>
       {recipient && (
         <>
           <span
