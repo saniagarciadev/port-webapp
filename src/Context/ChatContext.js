@@ -9,6 +9,7 @@ function ChatProvider({ children }) {
   const [contactsList, setContactsList] = useState(user.connections);
   const [recipient, setRecipient] = useState(null);
   const [incoming, setIncoming] = useState(null);
+  const [liveText, setLiveText] = useState(null);
 
   useEffect(() => {
     if (incoming && recipient) {
@@ -17,6 +18,7 @@ function ChatProvider({ children }) {
             return [incoming, ...prev];
           })
         : console.log("notification");
+      liveText && setLiveText(null);
     } else if (incoming) {
       console.log("notification");
     }
@@ -29,6 +31,8 @@ function ChatProvider({ children }) {
     setContactsList,
     recipient,
     setRecipient,
+    liveText,
+    setLiveText,
     setIncoming,
   };
 

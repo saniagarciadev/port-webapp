@@ -5,7 +5,7 @@ import { useChat } from "../Context/ChatContext";
 import { useSocket } from "../Context/SocketContext";
 
 export default function Chat(props) {
-  const { chatLog, setChatLog, recipient, theirLiveText } = useChat();
+  const { chatLog, setChatLog, recipient, liveText, setLiveText } = useChat();
   const { user } = useAuth();
   const chatBottom = useRef();
   const messageRef = useRef();
@@ -37,9 +37,12 @@ export default function Chat(props) {
     messageRef.current["message"].value = "";
   };
 
-  // const handleLiveText = (e) => {
-  //   socket.emit("live text", e.target.value);
-  // };
+  const sendLiveText = (e) => {
+    socket.emit("live text", {
+      input: e.target.value,
+      socketId: recipient.socketId,
+    });
+  };
 
   return (
     <div className="Chat">
@@ -47,11 +50,11 @@ export default function Chat(props) {
       {chatLog && (
         <ul className="chat-log">
           <div className="chat-bottom"></div>
-          {/* {recipient.isLive && theirLiveText && (
+          {liveText && (
             <li>
-              <div className="their-live-text">{theirLiveText}</div>
+              <div className="their-live-text">{liveText}</div>
             </li>
-          )} */}
+          )}
           {chatLog.map((m, index) => (
             <li
               key={index}
@@ -79,9 +82,9 @@ export default function Chat(props) {
           ref={messageRef}
         >
           <input
-            // onChange={(e) => {
-            //   recipient.isLive && handleLiveText(e);
-            // }}
+            onChange={(e) => {
+              recipient.status === "live" && sendLiveText(e);
+            }}
             className={
               recipient.status === "live"
                 ? "message-input live-input"

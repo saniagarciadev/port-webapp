@@ -17,6 +17,8 @@ export function SocketProvider({ children }) {
     contactsList,
     recipient,
     setIncoming,
+    liveText,
+    setLiveText,
     setChatLog,
     setContactsList,
   } = useChat();
@@ -84,10 +86,8 @@ export function SocketProvider({ children }) {
       socket.on("msg received", async (msg) => {
         setIncoming(msg);
       });
-      socket.on("liveMsg received", (msg) => {
-        setChatLog((prev) => {
-          return [msg, ...prev];
-        });
+      socket.on("live text", (input) => {
+        setLiveText(input);
       });
       socket.on("disconnect", (reason) => {
         setOnline(false);
