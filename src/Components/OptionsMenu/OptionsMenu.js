@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
 import { useSocket } from "../../Context/SocketContext";
+import { useUI } from "../../Context/UIContext";
 import ChangeUsername from "./ChangeUsername";
 import SaveAccount from "./SaveAccount";
 import LogOut from "./LogOut";
@@ -12,6 +13,7 @@ export default function OptionsMenu(props) {
   const [show, setShow] = useState(null);
   const [showOptionsMenuLabel, setShowOptionsMenuLabel] = useState(false);
   const [showOptionsMenuWindow, setShowOptionsMenuWindow] = useState(false);
+  const { optsOpacity, optsEvents } = useUI();
 
   const toggleShowOptionsMenu = () => {
     show && setShow(null);
@@ -25,36 +27,14 @@ export default function OptionsMenu(props) {
 
   return (
     <div>
-      <div className="options-button">
-        {online ? "online" : "offline"}
-        <span
-          className={`options-label ${
-            showOptionsMenuLabel ? "show-options-label" : "hide-options-label"
-          }`}
-        >
-          Options
-        </span>
-        <span
-          onMouseEnter={() => setShowOptionsMenuLabel(true)}
-          onMouseLeave={() => setShowOptionsMenuLabel(false)}
-          onClick={toggleShowOptionsMenu}
-          className="material-icons options-icon"
-        >
-          {showOptionsMenuWindow ? "close" : "menu"}
-        </span>
-      </div>
       <div
-        className={
-          showOptionsMenuWindow
-            ? "options-window show-options-window"
-            : "options-window hide-options-window"
-        }
+        className="options-menu"
+        style={{ opacity: optsOpacity, pointerEvents: optsEvents }}
       >
+        <h3 className="menu-title">Options</h3>
         {userIsTemp ? (
           <>
-            <p className="options-login-info">
-              Temporary user: {user.username}
-            </p>
+            <p className="options-login-info">Temporary user</p>
             <p className="options-login-info" style={{ fontSize: "1rem" }}>
               A temporary session expires when you close your web browser.
             </p>
@@ -66,7 +46,6 @@ export default function OptionsMenu(props) {
         ) : (
           <>
             <p className="options-login-info">
-              {user.username}
               <LogOut
                 values={{
                   user,

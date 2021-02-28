@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { useChat } from "../Context/ChatContext";
-import { useSocket } from "../Context/SocketContext";
+import { useChat } from "../../Context/ChatContext";
+import { useSocket } from "../../Context/SocketContext";
+import { useUI } from "../../Context/UIContext";
 
 export default function Contacts(props) {
   const {
@@ -11,18 +12,18 @@ export default function Contacts(props) {
     setContactsList,
   } = useChat();
   const { socket } = useSocket();
+  const { toggleConns, toggleOpts } = useUI();
 
   useEffect(() => {
     setRecipient(contactsList.find((c) => c.recipient));
   }, [contactsList]);
 
   const openConversation = async (contact) => {
-    contact.socketId &&
-      socket.emit("send status", {
-        userId: contact._id,
-        socketId: contact.socketId,
-        status: "live",
-      });
+    socket.emit("send status", {
+      userId: contact._id,
+      socketId: contact.socketId ? contact.socketId : null,
+      status: "live",
+    });
     if (recipient) {
       setContactsList((prev) =>
         prev.map((c) => {
@@ -49,57 +50,25 @@ export default function Contacts(props) {
     socket.once("chat history", (messages) => {
       setChatLog(messages);
     });
-  };
-
-  const closeConversation = async (contact) => {
-    setContactsList((prev) =>
-      prev.map((c) => (c._id === contact._id ? { ...c, recipient: false } : c))
-    );
-    contact.socketId &&
-      socket.emit("send status", {
-        userId: contact._id,
-        socketId: contact.socketId,
-        status: "online",
-      });
-    setChatLog([]);
+    toggleConns();
   };
 
   return (
     <div className="connections">
       {contactsList &&
-        contactsList.map((contact) => (
+        contactsList.map((contact, index) => (
           <>
             <span
+              key={index}
               onClick={() => openConversation(contact)}
               className={
                 contact.status ? `contact ${contact.status}` : "contact"
               }
             >
               {contact.username}
-              <div className="status">
-                {contact.status ? contact.status : "offline"}
-              </div>
             </span>
           </>
         ))}
-      <button onClick={() => console.log(recipient)}>log</button>
-      {recipient && (
-        <>
-          <span
-            onClick={() => openConversation(recipient)}
-            className={
-              recipient.status ? `recipient ${recipient.status}` : "recipient"
-            }
-          >
-            {" "}
-            {recipient.username}
-            <div className="status">
-              {recipient.status ? recipient.status : "offline"}
-            </div>
-          </span>
-          <button onClick={() => closeConversation(recipient)}>x</button>
-        </>
-      )}
     </div>
   );
 }

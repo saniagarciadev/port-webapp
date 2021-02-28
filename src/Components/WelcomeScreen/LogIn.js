@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
-import { useAuth } from "../Context/AuthContext";
+import { useAuth } from "../../Context/AuthContext";
 
-export default function LogInScreen() {
+export default function LogIn() {
   const { login, setUser, setUserIsTemp } = useAuth();
   const usernameRef = useRef();
   const passwordRef = useRef();

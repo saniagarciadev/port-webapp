@@ -1,26 +1,33 @@
-import React from "react";
-// import { Route } from "react-router-dom";
+import React, { useState } from "react";
 import "./App.css";
 import ContextProviders from "./Context/ContextProviders";
 import { useAuth } from "./Context/AuthContext";
-import NavBar from "./Components/NavBar";
-import Chat from "./Components/Chat";
-import LogInScreen from "./Components/LogInScreen";
+import { useUI } from "./Context/UIContext";
+import ChatWindow from "./Components/Chat/ChatWindow";
+import LogIn from "./Components/WelcomeScreen/LogIn";
+import ConnsMenu from "./Components/Connections/ConnsMenu";
+import OptionsMenu from "./Components/OptionsMenu/OptionsMenu";
+import Header from "./Components/Chat/Header";
 
 function App() {
   const { user } = useAuth();
+  const { appPosition } = useUI();
 
   return (
-    <div className="App">
+    <>
       {user ? (
         <ContextProviders>
-          <NavBar />
-          <Chat />
+          <Header />
+          <div className="app" style={{ margin: "0px " + appPosition + "vw" }}>
+            <ConnsMenu />
+            <ChatWindow />
+            <OptionsMenu />
+          </div>
         </ContextProviders>
       ) : (
-        <LogInScreen />
+        <LogIn />
       )}
-    </div>
+    </>
   );
 }
 
