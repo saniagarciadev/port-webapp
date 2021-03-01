@@ -10,9 +10,11 @@ export default function Contacts(props) {
     recipient,
     setRecipient,
     setContactsList,
+    liveText,
+    setLiveText,
   } = useChat();
   const { socket } = useSocket();
-  const { toggleConns, toggleOpts } = useUI();
+  const { toggleConns } = useUI();
 
   useEffect(() => {
     setRecipient(contactsList.find((c) => c.recipient));
@@ -51,6 +53,7 @@ export default function Contacts(props) {
       setChatLog(messages);
     });
     toggleConns();
+    liveText && setLiveText(null);
   };
 
   return (

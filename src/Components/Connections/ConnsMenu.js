@@ -4,13 +4,19 @@ import Contacts from "./Contacts";
 import { useUI } from "../../Context/UIContext";
 
 export default function ConnsMenu() {
-  const { connsOpacity, connsEvents } = useUI();
+  const { connsOpacity, connsEvents, toggleConns } = useUI();
+
   return (
     <div
       className="conns-menu"
       style={{ opacity: connsOpacity, pointerEvents: connsEvents }}
     >
-      <h3 className="menu-title">My connections</h3>
+      <div className="menu-title" style={{ justifyContent: "flex-end" }}>
+        <h3>My connections</h3>
+        <button onClick={() => toggleConns()} class="material-icons">
+          clear
+        </button>
+      </div>
       <Contacts />
       <AddConnection />
     </div>

@@ -13,7 +13,7 @@ export default function OptionsMenu(props) {
   const [show, setShow] = useState(null);
   const [showOptionsMenuLabel, setShowOptionsMenuLabel] = useState(false);
   const [showOptionsMenuWindow, setShowOptionsMenuWindow] = useState(false);
-  const { optsOpacity, optsEvents } = useUI();
+  const { optsOpacity, optsEvents, toggleOpts } = useUI();
 
   const toggleShowOptionsMenu = () => {
     show && setShow(null);
@@ -31,7 +31,12 @@ export default function OptionsMenu(props) {
         className="options-menu"
         style={{ opacity: optsOpacity, pointerEvents: optsEvents }}
       >
-        <h3 className="menu-title">Options</h3>
+        <div className="menu-title" style={{ justifyContent: "flex-start" }}>
+          <button onClick={() => toggleOpts()} class="material-icons">
+            clear
+          </button>
+          <h3>Options</h3>
+        </div>
         {userIsTemp ? (
           <>
             <p className="options-login-info">Temporary user</p>
