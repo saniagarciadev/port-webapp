@@ -59,7 +59,7 @@ body {
   display: inline-block;
   letter-spacing: 2px;
   font-weight: normal;
-  color: rgb(189, 159, 152);
+  color: rgb(219, 183, 173);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -74,7 +74,7 @@ body {
   border: 2px solid rgb(36, 26, 23);
   background-color: rgb(36, 26, 23);
   border-radius: 5px;
-  color: white;
+  color: rgb(219, 183, 173);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -85,6 +85,9 @@ body {
 }
 .login-screen input:focus {
   outline: none;
+}
+.login-screen input::placeholder {
+  color: rgb(170, 139, 130);
 }
 
 .later-input {
@@ -353,6 +356,11 @@ nav a:visited {
   flex-direction: column;
 }
 
+.connections ul {
+  list-style: none;
+  padding-inline-start: 0px;
+}
+
 .contact {
   margin-bottom: 20px;
   padding: 10px;
@@ -400,7 +408,8 @@ nav a:visited {
 .add-contact {
   padding: 10px;
   border-radius: 50px;
-  color: rgb(170, 139, 130);
+  color: white;
+  border: 2px solid rgb(170, 139, 130);
   background-color: rgb(29, 29, 29);
   transition: 0.3s;
   display: flex;
@@ -413,7 +422,7 @@ nav a:visited {
   position: relative;
   height: 24px;
   width: fit-content;
-  color: rgb(170, 139, 130);
+  color: rgb(219, 183, 173);
   border: none;
   background-color: transparent;
   outline: none;
@@ -424,16 +433,15 @@ nav a:visited {
 }
 
 .add-contact-input {
-  position: relative;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  font-size: 15px;
+  font-size: 1em;
   width: 70%;
-  color: white;
-  background-color: rgb(43, 43, 43);
-  padding: 5px 15px;
+  color: rgb(219, 183, 173);
+  background-color: transparent;
+  padding: 0px 15px;
   border-radius: 50px;
   border: none;
   opacity: 1;
@@ -445,7 +453,7 @@ nav a:visited {
   outline: none;
 }
 .add-contact input::placeholder {
-  color: rgb(170, 139, 130);
+  color: rgb(219, 183, 173);
 }
 
 /*~~ Options menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/

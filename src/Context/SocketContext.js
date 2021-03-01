@@ -45,11 +45,9 @@ export function SocketProvider({ children }) {
   useEffect(() => {
     if (socket) {
       socket.on("connect", () => {
-        console.log("socket connected");
         setOnline(true);
       });
-      socket.on("ask status", async ({ userId, socketId, status }) => {
-        console.log("ask status", userId, socketId, status);
+      socket.on("ask status", async ({ userId, socketId }) => {
         const isContact = await contactsList.find((c) => c._id === userId);
         if (isContact) {
           setContactsList((prev) =>
@@ -69,7 +67,6 @@ export function SocketProvider({ children }) {
         }
       });
       socket.on("status", async ({ userId, socketId, status }) => {
-        console.log("status", userId, socketId, status);
         setContactsList((prev) =>
           prev.map((c) =>
             c._id === userId ? { ...c, socketId: socketId, status } : c

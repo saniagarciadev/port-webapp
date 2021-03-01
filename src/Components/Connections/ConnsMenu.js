@@ -1,5 +1,4 @@
 import React from "react";
-import AddConnection from "./AddConnection";
 import Contacts from "./Contacts";
 import { useUI } from "../../Context/UIContext";
 
@@ -18,7 +17,6 @@ export default function ConnsMenu() {
         </button>
       </div>
       <Contacts />
-      <AddConnection />
     </div>
   );
 }

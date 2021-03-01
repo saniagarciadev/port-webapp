@@ -10,6 +10,7 @@ function UIProvider({ children }) {
   const [chatOpacity, setChatOpacity] = useState(1);
   const [appPosition, setAppPosition] = useState(0);
   const [chatOpen, setChatOpen] = useState(true);
+  const [showAddConn, setShowAddConn] = useState(false);
 
   const toggleConns = () => {
     setAppPosition((prev) => {
@@ -27,6 +28,7 @@ function UIProvider({ children }) {
     setChatOpen((prev) => {
       return !prev;
     });
+    showAddConn && setShowAddConn(false);
   };
 
   const toggleOpts = () => {
@@ -66,6 +68,8 @@ function UIProvider({ children }) {
         setChatOpen,
         toggleConns,
         toggleOpts,
+        showAddConn,
+        setShowAddConn,
       }}
     >
       {children}

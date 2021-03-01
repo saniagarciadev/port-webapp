@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useChat } from "../../Context/ChatContext";
 import { useSocket } from "../../Context/SocketContext";
 import { useUI } from "../../Context/UIContext";
+import AddConnection from "./AddConnection";
 
 export default function Contacts(props) {
   const {
@@ -58,10 +59,10 @@ export default function Contacts(props) {
 
   return (
     <div className="connections">
-      {contactsList &&
-        contactsList.map((contact, index) => (
-          <>
-            <span
+      <ul>
+        {contactsList &&
+          contactsList.map((contact, index) => (
+            <li
               key={index}
               onClick={() => openConversation(contact)}
               className={
@@ -69,9 +70,10 @@ export default function Contacts(props) {
               }
             >
               {contact.username}
-            </span>
-          </>
-        ))}
+            </li>
+          ))}
+        <AddConnection />
+      </ul>
     </div>
   );
 }
