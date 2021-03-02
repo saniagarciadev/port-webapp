@@ -8,13 +8,13 @@ function UIProvider({ children }) {
   const [optsOpacity, setOptsOpacity] = useState(0);
   const [optsEvents, setOptsEvents] = useState("none");
   const [chatOpacity, setChatOpacity] = useState(1);
-  const [appPosition, setAppPosition] = useState(0);
+  const [appPosition, setAppPosition] = useState(-25);
   const [chatOpen, setChatOpen] = useState(true);
   const [showAddConn, setShowAddConn] = useState(false);
 
   const toggleConns = () => {
     setAppPosition((prev) => {
-      return prev === 0 ? 25 : 0;
+      return prev === -25 ? 0 : -25;
     });
     setConnsOpacity((prev) => {
       return prev === 0 ? 1 : 0;
@@ -33,7 +33,7 @@ function UIProvider({ children }) {
 
   const toggleOpts = () => {
     setAppPosition((prev) => {
-      return prev === 0 ? -25 : 0;
+      return prev === -50 ? -25 : -50;
     });
     setOptsOpacity((prev) => {
       return prev === 0 ? 1 : 0;

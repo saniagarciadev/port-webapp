@@ -10,7 +10,7 @@ export default function ConnsMenu() {
       className="conns-menu"
       style={{ opacity: connsOpacity, pointerEvents: connsEvents }}
     >
-      <div className="menu-title" style={{ justifyContent: "flex-end" }}>
+      <div className="menu-title">
         <h3>My connections</h3>
         <button onClick={() => toggleConns()} class="material-icons">
           clear
