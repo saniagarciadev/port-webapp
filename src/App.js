@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
 import ContextProviders from "./Context/ContextProviders";
 import { useAuth } from "./Context/AuthContext";
@@ -18,7 +18,7 @@ function App() {
       {user ? (
         <ContextProviders>
           <Header />
-          <div className="app" style={{ margin: "0px " + appPosition + "vw" }}>
+          <div className={`app ${appPosition}`}>
             <ConnsMenu />
             <ChatWindow />
             <OptionsMenu />

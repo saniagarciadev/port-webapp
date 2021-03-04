@@ -1,26 +1,14 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import "../../App.css";
 import { useAuth } from "../../Context/AuthContext";
 import { useChat } from "../../Context/ChatContext";
 
 export default function ChatLog(props) {
-  const { chatLog, setChatLog, liveText } = useChat();
+  const { chatLog, liveText } = useChat();
   const { user } = useAuth();
-  const chatBottom = useRef();
-
-  const scrollToBottom = () => {
-    if (chatBottom.current) {
-      chatBottom.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [chatLog, setChatLog]);
 
   return (
     <div className="chat-log">
-      <div ref={chatBottom}></div>
       {chatLog && (
         <ul className="message-list">
           <div className="chat-bottom"></div>

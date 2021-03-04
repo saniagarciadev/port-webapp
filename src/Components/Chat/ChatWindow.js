@@ -5,6 +5,7 @@ import { useUI } from "../../Context/UIContext";
 
 export default function ChatWindow() {
   const { chatOpacity } = useUI();
+
   return (
     <div className="chat-window" style={{ opacity: chatOpacity }}>
       <InputArea />

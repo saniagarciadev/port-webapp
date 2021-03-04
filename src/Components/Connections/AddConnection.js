@@ -53,13 +53,14 @@ export default function AddConnection(props) {
             name="username"
             type="text"
             placeholder="Enter contact username"
+            autofocus="true"
           ></input>
           <button>Add</button>
         </form>
       ) : (
         <li
           onClick={() => setShowAddConn(true)}
-          className="contact"
+          className="contact plus-button"
           style={{ fontSize: "2em", padding: "0px 0px 5px 0px" }}
         >
           +

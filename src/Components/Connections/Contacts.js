@@ -22,6 +22,7 @@ export default function Contacts(props) {
   }, [contactsList]);
 
   const openConversation = async (contact) => {
+    toggleConns();
     socket.emit("send status", {
       userId: contact._id,
       socketId: contact.socketId ? contact.socketId : null,
@@ -53,7 +54,6 @@ export default function Contacts(props) {
     socket.once("chat history", (messages) => {
       setChatLog(messages);
     });
-    toggleConns();
     liveText && setLiveText(null);
   };
 

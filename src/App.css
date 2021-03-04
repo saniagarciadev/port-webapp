@@ -37,11 +37,34 @@ body {
 /*~~~~~~~ App ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 .app {
-  height: fit-content;
-  width: fit-content;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(3, 100vw);
+  grid-template-rows: 100vh;
+  grid-template-areas: "left center right";
   transition: 1s;
+  overflow: hidden;
+  margin: 0;
+}
+.open-chat {
+  margin-left: -100vw;
+}
+.open-left-menu {
+  margin-left: 0vw;
+}
+.open-right-menu {
+  margin-left: -200vw;
+}
+
+@media (min-width: 768px) {
+  .app {
+    grid-template-columns: 25vw 100vw 25vw;
+  }
+  .open-chat {
+    margin-left: -25vw;
+  }
+  .open-right-menu {
+    margin-left: -50vw;
+  }
 }
 
 /*~~~~~~~ Login Screen ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -59,7 +82,7 @@ body {
   display: inline-block;
   letter-spacing: 2px;
   font-weight: normal;
-  color: rgb(219, 183, 173);
+  color: rgb(255, 189, 158);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -67,22 +90,6 @@ body {
   font-size: 25px;
 }
 
-.login-screen input {
-  margin: auto;
-  padding: 5px 40px;
-  text-align: center;
-  border: 2px solid rgb(36, 26, 23);
-  background-color: rgb(36, 26, 23);
-  border-radius: 5px;
-  color: rgb(219, 183, 173);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  font-size: 25px;
-  width: 400px;
-  max-width: 40vw;
-}
 .login-screen input:focus {
   outline: none;
 }
@@ -92,16 +99,21 @@ body {
 
 .later-input {
   position: relative;
-  top: -60px;
+  flex-direction: column;
 }
 
 .go-back {
+  color: white;
+  background-color: transparent;
+  border: none;
   display: block;
   cursor: pointer;
+  pointer-events: auto;
   width: 40px;
-  height: 20px;
+  height: 40px;
+  text-align: center;
   margin: auto;
-  padding: 20px;
+  padding: auto;
 }
 
 .show-login-input {
@@ -118,7 +130,7 @@ header {
   position: fixed;
   top: 0;
   height: 80px;
-  width: 100%;
+  width: 100vw;
   z-index: 3;
 }
 
@@ -157,6 +169,11 @@ nav a:visited {
   grid-template-areas: "left-button recipient center-button username-1 username-2 right-button";
   z-index: 3;
   transition: 1s;
+}
+@media (max-width: 768px) {
+  .nav-list {
+    grid-template-columns: 50px 2fr 110px 1fr 1fr 50px;
+  }
 }
 .nav-list li {
   display: flex;
@@ -282,8 +299,13 @@ nav a:visited {
   z-index: 0;
   transition: 0.3s;
 }
+@media (max-width: 768px) {
+  .animated-nav {
+    width: 80px;
+  }
+}
 .hidden-nav {
-  width: 50vw;
+  width: 100vw;
   opacity: 0;
 }
 
@@ -317,6 +339,8 @@ nav a:visited {
   align-items: center;
   justify-content: flex-end;
   background-color: rgb(36, 26, 23);
+  position: relative;
+  z-index: 4;
   /* background-color: rgb(1, 59, 44); */
 }
 
@@ -338,7 +362,7 @@ nav a:visited {
   cursor: pointer;
   pointer-events: auto;
   transition: 0.5s;
-  z-index: 3;
+  z-index: 4;
 }
 .menu-title button:hover {
   color: rgb(219, 183, 173);
@@ -346,16 +370,18 @@ nav a:visited {
 
 /*~~~~ Connections Menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 .conns-menu {
-  position: relative;
-  width: 25vw;
+  grid-area: left;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   transition: 0.4s;
   transition-timing-function: cubic-bezier(0.65, 0.11, 0.78, 1.05);
-  z-index: 3;
 }
 
 .connections {
   width: 100%;
-  height: fit-content;
+  height: 100%;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -374,7 +400,7 @@ nav a:visited {
   transition: 0.3s;
 }
 .contact:hover {
-  background-color: rgb(1, 59, 44);
+  background-color: rgb(170, 139, 130);
 }
 
 .online {
@@ -399,10 +425,18 @@ nav a:visited {
   }
 }
 
+.plus-button {
+  border: 2px solid black;
+}
+.plus-button:hover {
+  border: 2px solid rgb(170, 139, 130);
+  background-color: rgb(29, 29, 29);
+}
+
 .add-contact {
-  padding: 10px;
-  border-radius: 0px;
   color: white;
+  padding: 10px;
+  border-radius: 0px 50px 50px 0px;
   border: 2px solid rgb(170, 139, 130);
   background-color: rgb(29, 29, 29);
   transition: 0.3s;
@@ -453,9 +487,9 @@ nav a:visited {
 /*~~ Options menu ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 .options-menu {
-  position: relative;
-  width: 25vw;
-  z-index: 3;
+  grid-area: right;
+  width: 100%;
+  height: 100%;
   transition: 0.4s;
 }
 
@@ -625,8 +659,9 @@ nav a:visited {
 /*~~~~~~~ Chat Log ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 .chat-window {
-  width: fit-content;
-  height: 100vh;
+  grid-area: center;
+  width: 100%;
+  height: 100%;
   transition: 0.4s;
 }
 
@@ -641,33 +676,31 @@ nav a:visited {
 
 .chat-log {
   position: relative;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  flex-direction: column-reverse;
+  width: 100%;
+  height: 100%;
   overflow-y: scroll;
-  transition: 0.4s;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: flex-start;
+  transition: 0.3s;
   z-index: 0;
 }
 
 .message-list {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column-reverse;
   justify-content: flex-start;
   overflow-wrap: break-word;
   list-style: none;
-  padding-top: 300px;
   padding-inline-start: 0px;
   padding-inline-end: 0px;
+  padding-block-start: 400px;
+  padding-block-end: 100px;
   transition: 0.4s;
-}
-
-@media (max-width: 700px) {
-  .chat-log {
-    width: 95vw;
-  }
 }
 
 .my-message-line {
@@ -706,9 +739,8 @@ nav a:visited {
   border-radius: 0px 0px 0px 0px;
 }
 
-@media (max-width: 699px) {
+@media (max-width: 768px) {
   .message-list {
-    width: 95vw;
     font-size: 1.2em;
   }
   .my-message {
@@ -722,7 +754,7 @@ nav a:visited {
 }
 
 .chat-bottom {
-  height: 120px;
+  height: 100px;
   width: 100%;
 }
 
@@ -747,13 +779,15 @@ nav a:visited {
   bottom: 0;
   width: 100vw;
   height: 116px;
-  z-index: 1;
+  z-index: 3;
   pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .message-input {
   width: 50%;
-  margin-left: -5px;
   font-size: 1.5em;
   text-align: center;
   padding: 0px;
@@ -771,8 +805,9 @@ nav a:visited {
   transition: 0.4s;
 }
 @media (max-width: 700px) {
-  .message-form {
-    width: 95vw;
+  .message-input {
+    width: 90%;
+    border: 2px solid rgb(255, 189, 158);
   }
 }
 

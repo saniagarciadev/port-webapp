@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { useAuth } from "../../Context/AuthContext";
 
 export default function LogIn() {
@@ -56,30 +56,44 @@ export default function LogIn() {
     setShowUsernameInput(true);
   };
 
+  useEffect(() => {
+    showPasswordInput && passwordRef.current["password"].focus();
+  }, [showPasswordInput]);
+
   return (
     <div className="login-screen">
-      <h1 className="app-title">Port - Version Alpha 0.05</h1>
+      <h1 className="app-title">Port</h1>
       <form
         ref={usernameRef}
-        className={showUsernameInput ? "show-login-input" : "hide-login-input"}
+        className={showUsernameInput ? "message-form" : "hide-login-input"}
+        style={{ position: "relative" }}
         onSubmit={handleUsername}
       >
-        <input name="username" placeholder="Username" required></input>
+        <input
+          className="message-input"
+          name="username"
+          placeholder="Username"
+          autoFocus={true}
+          required
+        ></input>
       </form>
       <form
         ref={passwordRef}
         className={`later-input ${
-          showPasswordInput ? "show-login-input" : "hide-login-input"
+          showPasswordInput ? "message-form" : "hide-login-input"
         }`}
+        style={{ position: "relative" }}
         onSubmit={handlePassword}
       >
-        <p className="material-icons go-back" onClick={goBack}>
+        <button className="material-icons go-back" onClick={goBack}>
           keyboard_backspace
-        </p>
+        </button>
         <input
+          className="message-input"
           type="password"
           name="password"
           placeholder="Password"
+          autoFocus={true}
           required
         ></input>
       </form>

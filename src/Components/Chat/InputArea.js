@@ -34,27 +34,22 @@ export default function InputArea() {
   };
 
   return (
-    <div>
+    <form onSubmit={handleMessage} className="message-form" ref={messageRef}>
       {recipient && (
-        <form
-          onSubmit={handleMessage}
-          className="message-form"
-          ref={messageRef}
-        >
-          <input
-            onChange={(e) => {
-              recipient.status === "live" && sendLiveText(e);
-            }}
-            className={
-              recipient.status === "live"
-                ? "message-input live-input"
-                : "message-input"
-            }
-            name="message"
-            autoComplete="off"
-          ></input>
-        </form>
+        <input
+          onChange={(e) => {
+            recipient.status === "live" && sendLiveText(e);
+          }}
+          className={
+            recipient.status === "live"
+              ? "message-input live-input"
+              : "message-input"
+          }
+          name="message"
+          autoComplete="off"
+          autoFocus={true}
+        ></input>
       )}
-    </div>
+    </form>
   );
 }
