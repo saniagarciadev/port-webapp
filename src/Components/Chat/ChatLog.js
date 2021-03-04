@@ -11,7 +11,6 @@ export default function ChatLog(props) {
     <div className="chat-log">
       {chatLog && (
         <ul className="message-list">
-          <div className="chat-bottom"></div>
           {liveText && (
             <li>
               <div className="their-live-text">{liveText}</div>
